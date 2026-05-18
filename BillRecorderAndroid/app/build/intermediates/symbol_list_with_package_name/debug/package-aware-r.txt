@@ -2942,6 +2942,7 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
+drawable input_bg
 drawable m3_appbar_background
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3013,6 +3014,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable popup_bg
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3116,6 +3118,8 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id btnNextMonth
+id btnPopupDiscard
+id btnPopupSave
 id btnPrevMonth
 id btnSetBudget
 id buttonPanel
@@ -3202,6 +3206,8 @@ id enterAlways
 id enterAlwaysCollapsed
 id etAmount
 id etNote
+id etPopupLabel
+id etPopupNote
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -3525,12 +3531,14 @@ id tvCatAmount
 id tvCatIcon
 id tvCatName
 id tvCatPercent
+id tvClose
 id tvDateHeader
 id tvExpenseSoFar
 id tvIcon
 id tvIncomeSoFar
 id tvMenu
 id tvMonth
+id tvPopupAmount
 id tvTitle
 id tvTotal
 id tvTotalBudget
@@ -3759,6 +3767,7 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout popup_overlay
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material

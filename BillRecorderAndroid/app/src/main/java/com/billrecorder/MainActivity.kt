@@ -1,6 +1,9 @@
 package com.billrecorder
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -11,6 +14,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         DataManager.init(this)
         setContentView(R.layout.activity_main)
+
+        // Request overlay permission once if not granted (needed for popup)
+        if (!Settings.canDrawOverlays(this)) {
+            startActivity(
+                Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName"))
+            )
+        }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 

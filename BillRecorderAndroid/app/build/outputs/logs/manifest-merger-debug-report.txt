@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-31:12
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:1-37:12
 MERGED from [androidx.databinding:viewbinding:8.1.4] C:\Users\hp\.gradle\caches\transforms-3\37e1cb34c5509435344f4c3104d2b8c4\transformed\jetified-viewbinding-8.1.4\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hp\.gradle\caches\transforms-3\8edfcb2bbe0f0ebbd6915da210af6fb5\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\hp\.gradle\caches\transforms-3\6f1392cb6c0c7a1a72aa199144e9475e\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
@@ -63,9 +63,13 @@ MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\hp\.gra
 		INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:5:5-78
+	android:name
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:5:22-75
 application
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:5:5-30:19
-INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:5:5-30:19
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:7:5-36:19
+INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:7:5-36:19
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hp\.gradle\caches\transforms-3\8edfcb2bbe0f0ebbd6915da210af6fb5\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hp\.gradle\caches\transforms-3\8edfcb2bbe0f0ebbd6915da210af6fb5\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\hp\.gradle\caches\transforms-3\6f1392cb6c0c7a1a72aa199144e9475e\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -87,47 +91,53 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\hp\.gradle\caches\
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.10.1] C:\Users\hp\.gradle\caches\transforms-3\d5caf5d1ed8f46252d2f0d21ad623767\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:8:9-35
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:10:9-35
 	android:label
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:7:9-41
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:9:9-41
 	tools:targetApi
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:10:9-29
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:12:9-29
 	android:allowBackup
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:6:9-35
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:8:9-35
 	android:theme
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:9:9-50
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:11:9-50
 activity#com.billrecorder.MainActivity
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:12:9-19:20
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:14:9-21:20
 	android:exported
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:14:13-36
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:16:13-36
 	android:name
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:13:13-41
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:15:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:15:13-18:29
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:17:13-20:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:16:17-69
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:18:17-69
 	android:name
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:16:25-66
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:18:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:17:17-77
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:19:17-77
 	android:name
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:17:27-74
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:19:27-74
 service#com.billrecorder.BillNotificationService
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:21:9-29:19
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:23:9-31:19
 	android:label
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:23:13-47
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:25:13-47
 	android:exported
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:25:13-36
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:27:13-36
 	android:permission
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:24:13-87
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:26:13-87
 	android:name
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:22:13-52
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:24:13-52
 intent-filter#action:name:android.service.notification.NotificationListenerService
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:26:13-28:29
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:28:13-30:29
 action#android.service.notification.NotificationListenerService
-ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:27:17-99
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:29:17-99
 	android:name
-		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:27:25-96
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:29:25-96
+service#com.billrecorder.PopupOverlayService
+ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:33:9-35:40
+	android:exported
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:34:13-48
 uses-sdk
 INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml
