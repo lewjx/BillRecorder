@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background">#F5F7FA</color>
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="expenseRed">#E53E3E</color>
+    <color name="incomeGreen">#38A169</color>
+    <color name="textPrimary">#2D3748</color>
+    <color name="textSecondary">#718096</color>
     <string name="app_name">BillRecorder</string>
 </resources>

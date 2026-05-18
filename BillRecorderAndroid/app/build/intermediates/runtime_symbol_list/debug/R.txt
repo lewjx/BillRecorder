@@ -1331,6 +1331,7 @@ int color accent_material_dark 0x7f050019
 int color accent_material_light 0x7f05001a
 int color androidx_core_ripple_material_light 0x7f05001b
 int color androidx_core_secondary_text_default_material_light 0x7f05001c
+int color background 0x7f0502e6
 int color background_floating_material_dark 0x7f05001d
 int color background_floating_material_light 0x7f05001e
 int color background_material_dark 0x7f05001f
@@ -1345,10 +1346,14 @@ int color button_material_dark 0x7f050027
 int color button_material_light 0x7f050028
 int color call_notification_answer_color 0x7f050029
 int color call_notification_decline_color 0x7f05002a
+int color cardBackground 0x7f0502e7
 int color cardview_dark_background 0x7f05002b
 int color cardview_light_background 0x7f05002c
 int color cardview_shadow_end_color 0x7f05002d
 int color cardview_shadow_start_color 0x7f05002e
+int color colorAccent 0x7f0502e8
+int color colorPrimary 0x7f0502e9
+int color colorPrimaryDark 0x7f0502ea
 int color design_bottom_navigation_shadow_color 0x7f05002f
 int color design_box_stroke_color 0x7f050030
 int color design_dark_default_color_background 0x7f050031
@@ -1393,10 +1398,12 @@ int color dim_foreground_material_dark 0x7f050057
 int color dim_foreground_material_light 0x7f050058
 int color error_color_material_dark 0x7f050059
 int color error_color_material_light 0x7f05005a
+int color expenseRed 0x7f0502eb
 int color foreground_material_dark 0x7f05005b
 int color foreground_material_light 0x7f05005c
 int color highlighted_text_material_dark 0x7f05005d
 int color highlighted_text_material_light 0x7f05005e
+int color incomeGreen 0x7f0502ec
 int color m3_appbar_overlay_color 0x7f05005f
 int color m3_assist_chip_icon_tint_color 0x7f050060
 int color m3_assist_chip_stroke_color 0x7f050061
@@ -2042,6 +2049,8 @@ int color switch_thumb_material_dark 0x7f0502e0
 int color switch_thumb_material_light 0x7f0502e1
 int color switch_thumb_normal_material_dark 0x7f0502e2
 int color switch_thumb_normal_material_light 0x7f0502e3
+int color textPrimary 0x7f0502ed
+int color textSecondary 0x7f0502ee
 int color tooltip_background_dark 0x7f0502e4
 int color tooltip_background_light 0x7f0502e5
 int dimen abc_action_bar_content_inset_material 0x7f060000
@@ -3348,6 +3357,7 @@ int id progress_horizontal 0x7f080153
 int id radio 0x7f080154
 int id ratio 0x7f080155
 int id rectangles 0x7f080156
+int id recyclerView 0x7f0801f0
 int id reverseSawtooth 0x7f080157
 int id right 0x7f080158
 int id rightToLeft 0x7f080159
@@ -3476,8 +3486,11 @@ int id transition_position 0x7f0801d3
 int id transition_scene_layoutid_cache 0x7f0801d4
 int id transition_transform 0x7f0801d5
 int id triangle 0x7f0801d6
-int id tvLogs 0x7f0801d7
+int id tvAmount 0x7f0801f1
+int id tvBalance 0x7f0801f2
+int id tvDate 0x7f0801f3
 int id tvStatus 0x7f0801d8
+int id tvTitle 0x7f0801f4
 int id unchecked 0x7f0801d9
 int id uniform 0x7f0801da
 int id unlabeled 0x7f0801db
@@ -3631,6 +3644,7 @@ int layout design_navigation_menu 0x7f0b0029
 int layout design_navigation_menu_item 0x7f0b002a
 int layout design_text_input_end_icon 0x7f0b002b
 int layout design_text_input_start_icon 0x7f0b002c
+int layout item_transaction 0x7f0b006a
 int layout m3_alert_dialog 0x7f0b002d
 int layout m3_alert_dialog_actions 0x7f0b002e
 int layout m3_alert_dialog_title 0x7f0b002f

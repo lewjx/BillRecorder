@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.billrecorder.R;
@@ -24,16 +25,20 @@ public final class ActivityMainBinding implements ViewBinding {
   public final Button btnGrantPermission;
 
   @NonNull
-  public final TextView tvLogs;
+  public final RecyclerView recyclerView;
+
+  @NonNull
+  public final TextView tvBalance;
 
   @NonNull
   public final TextView tvStatus;
 
   private ActivityMainBinding(@NonNull LinearLayout rootView, @NonNull Button btnGrantPermission,
-      @NonNull TextView tvLogs, @NonNull TextView tvStatus) {
+      @NonNull RecyclerView recyclerView, @NonNull TextView tvBalance, @NonNull TextView tvStatus) {
     this.rootView = rootView;
     this.btnGrantPermission = btnGrantPermission;
-    this.tvLogs = tvLogs;
+    this.recyclerView = recyclerView;
+    this.tvBalance = tvBalance;
     this.tvStatus = tvStatus;
   }
 
@@ -70,9 +75,15 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvLogs;
-      TextView tvLogs = ViewBindings.findChildViewById(rootView, id);
-      if (tvLogs == null) {
+      id = R.id.recyclerView;
+      RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerView == null) {
+        break missingId;
+      }
+
+      id = R.id.tvBalance;
+      TextView tvBalance = ViewBindings.findChildViewById(rootView, id);
+      if (tvBalance == null) {
         break missingId;
       }
 
@@ -82,7 +93,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((LinearLayout) rootView, btnGrantPermission, tvLogs, tvStatus);
+      return new ActivityMainBinding((LinearLayout) rootView, btnGrantPermission, recyclerView,
+          tvBalance, tvStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

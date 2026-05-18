@@ -1,7 +1,21 @@
 R_DEF: Internal format may change without notice
 local
+color background
+color cardBackground
+color colorAccent
+color colorPrimary
+color colorPrimaryDark
+color expenseRed
+color incomeGreen
+color textPrimary
+color textSecondary
 id btnGrantPermission
-id tvLogs
+id recyclerView
+id tvAmount
+id tvBalance
+id tvDate
 id tvStatus
+id tvTitle
 layout activity_main
+layout item_transaction
 string app_name
