@@ -1,0 +1,96 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.billrecorder"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="33" />
+10
+11    <permission
+11-->[androidx.core:core:1.10.1] C:\Users\hp\.gradle\caches\transforms-3\d5caf5d1ed8f46252d2f0d21ad623767\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+12        android:name="com.billrecorder.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+12-->[androidx.core:core:1.10.1] C:\Users\hp\.gradle\caches\transforms-3\d5caf5d1ed8f46252d2f0d21ad623767\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+13        android:protectionLevel="signature" />
+13-->[androidx.core:core:1.10.1] C:\Users\hp\.gradle\caches\transforms-3\d5caf5d1ed8f46252d2f0d21ad623767\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+14
+15    <uses-permission android:name="com.billrecorder.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+15-->[androidx.core:core:1.10.1] C:\Users\hp\.gradle\caches\transforms-3\d5caf5d1ed8f46252d2f0d21ad623767\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.10.1] C:\Users\hp\.gradle\caches\transforms-3\d5caf5d1ed8f46252d2f0d21ad623767\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+16
+17    <application
+17-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:5:5-30:19
+18        android:allowBackup="true"
+18-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:6:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.10.1] C:\Users\hp\.gradle\caches\transforms-3\d5caf5d1ed8f46252d2f0d21ad623767\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+20        android:debuggable="true"
+21        android:extractNativeLibs="false"
+22        android:label="@string/app_name"
+22-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:7:9-41
+23        android:supportsRtl="true"
+23-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:8:9-35
+24        android:testOnly="true"
+25        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" >
+25-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:9:9-70
+26        <activity
+26-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:12:9-19:20
+27            android:name="com.billrecorder.MainActivity"
+27-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:13:13-41
+28            android:exported="true" >
+28-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:14:13-36
+29            <intent-filter>
+29-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:15:13-18:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:16:17-69
+30-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:16:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:17:17-77
+32-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:17:27-74
+33            </intent-filter>
+34        </activity>
+35
+36        <service
+36-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:21:9-29:19
+37            android:name="com.billrecorder.BillNotificationService"
+37-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:22:13-52
+38            android:exported="true"
+38-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:25:13-36
+39            android:label="Auto Bill Recorder"
+39-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:23:13-47
+40            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+40-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:24:13-87
+41            <intent-filter>
+41-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:26:13-28:29
+42                <action android:name="android.service.notification.NotificationListenerService" />
+42-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:27:17-99
+42-->C:\Users\hp\Downloads\BillRecorder\BillRecorder\BillRecorderAndroid\app\src\main\AndroidManifest.xml:27:25-96
+43            </intent-filter>
+44        </service>
+45
+46        <provider
+46-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hp\.gradle\caches\transforms-3\f3dfd92bba3e6dff411718d287d02dd0\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+47            android:name="androidx.startup.InitializationProvider"
+47-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hp\.gradle\caches\transforms-3\f3dfd92bba3e6dff411718d287d02dd0\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+48            android:authorities="com.billrecorder.androidx-startup"
+48-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hp\.gradle\caches\transforms-3\f3dfd92bba3e6dff411718d287d02dd0\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+49            android:exported="false" >
+49-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hp\.gradle\caches\transforms-3\f3dfd92bba3e6dff411718d287d02dd0\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+50            <meta-data
+50-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hp\.gradle\caches\transforms-3\f3dfd92bba3e6dff411718d287d02dd0\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+51                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+51-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hp\.gradle\caches\transforms-3\f3dfd92bba3e6dff411718d287d02dd0\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+52                android:value="androidx.startup" />
+52-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hp\.gradle\caches\transforms-3\f3dfd92bba3e6dff411718d287d02dd0\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+53            <meta-data
+53-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hp\.gradle\caches\transforms-3\e06c4103c422520612c63fc6bb9f54da\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+54                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+54-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hp\.gradle\caches\transforms-3\e06c4103c422520612c63fc6bb9f54da\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+55                android:value="androidx.startup" />
+55-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hp\.gradle\caches\transforms-3\e06c4103c422520612c63fc6bb9f54da\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+56        </provider>
+57    </application>
+58
+59</manifest>

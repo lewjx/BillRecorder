@@ -19,16 +19,28 @@ class BillNotificationService : NotificationListenerService() {
 
         val packageName = sbn.packageName
         val extras = sbn.notification.extras
+        
+        // Bank apps often hide text in BigText or Ticker, so we extract everything possible
         val title = extras.getString(Notification.EXTRA_TITLE) ?: ""
         val text = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: ""
-
-        // Filter: We look for money amounts in the text, e.g., RM 50.00, $10, etc.
-        // You can expand this logic to filter specific bank package names.
-        val moneyRegex = Pattern.compile("(RM|\\$)\\s?\\d+(\\.\\d{1,2})?", Pattern.CASE_INSENSITIVE)
+        val bigText = extras.getCharSequence(Notification.EXTRA_BIG_TEXT)?.toString() ?: ""
+        val ticker = sbn.notification.tickerText?.toString() ?: ""
         
-        if (moneyRegex.matcher(text).find() || packageName.contains("bank", ignoreCase = true)) {
+        val fullContent = "$title $text $bigText $ticker"
+
+        // Expanded currency regex (RM, $, SGD, S$)
+        val moneyRegex = Pattern.compile("(RM|SGD|S\\$|\\$)\\s?\\d+(\\.\\d{1,2})?", Pattern.CASE_INSENSITIVE)
+        // Keywords for testing via Gmail/SMS
+        val keywordRegex = Pattern.compile("(paid|transfer|transaction|receipt)", Pattern.CASE_INSENSITIVE)
+        
+        // Known banking and email apps
+        val isTargetApp = packageName.contains("bank", ignoreCase = true) || 
+                          packageName.contains("ocbc", ignoreCase = true) ||
+                          packageName.contains("com.google.android.gm") // Gmail
+        
+        if (moneyRegex.matcher(fullContent).find() || keywordRegex.matcher(fullContent).find() || isTargetApp) {
             val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
-            val logEntry = "[$timestamp] App: $packageName\nTitle: $title\nBody: $text"
+            val logEntry = "[$timestamp] App: $packageName\nTitle: $title\nBody: $text\nBigText: $bigText"
             
             Log.d("BillRecorder", logEntry)
             saveLog(logEntry)
