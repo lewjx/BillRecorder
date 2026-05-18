@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.billrecorder.app-mergeDebugResources-26:/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "com.billrecorder.app-mergeDebugResources-35:/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hp\\.gradle\\caches\\transforms-3\\1e8d65fca5f0b1ddcbe7be1da278e70f\\transformed\\appcompat-1.6.1\\res\\values-h720dp-v13\\values-h720dp-v13.xml",

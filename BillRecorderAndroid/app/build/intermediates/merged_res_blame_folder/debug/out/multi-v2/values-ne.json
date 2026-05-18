@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.billrecorder.app-mergeDebugResources-26:/values-ne/values-ne.xml",
+            "outputFile": "com.billrecorder.app-mergeDebugResources-35:/values-ne/values-ne.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hp\\.gradle\\caches\\transforms-3\\d5caf5d1ed8f46252d2f0d21ad623767\\transformed\\core-1.10.1\\res\\values-ne\\values-ne.xml",

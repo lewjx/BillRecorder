@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.BillRecorder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/textPrimary</item>
+        <item name="colorPrimaryVariant">@color/textPrimary</item>
+        <item name="colorOnPrimary">@color/bgDark</item>
+        
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/textPrimary</item>
+        <item name="colorSecondaryVariant">@color/textPrimary</item>
+        <item name="colorOnSecondary">@color/bgDark</item>
+        
+        <!-- Background -->
+        <item name="android:colorBackground">@color/bgDark</item>
+        <item name="colorSurface">@color/bgList</item>
+        <item name="android:statusBarColor">@color/bgDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

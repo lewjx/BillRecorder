@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.billrecorder.app-mergeDebugResources-26:/values-sr/values-sr.xml",
+            "outputFile": "com.billrecorder.app-mergeDebugResources-35:/values-sr/values-sr.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hp\\.gradle\\caches\\transforms-3\\1e8d65fca5f0b1ddcbe7be1da278e70f\\transformed\\appcompat-1.6.1\\res\\values-sr\\values-sr.xml",

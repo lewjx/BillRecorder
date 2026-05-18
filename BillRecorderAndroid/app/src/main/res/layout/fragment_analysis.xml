@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bgDark">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:padding="16dp" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="MyMoney" android:textStyle="bold"
+            android:textSize="22sp" android:textColor="@color/textPrimary"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center" android:paddingVertical="4dp">
+        <TextView android:id="@+id/btnPrevMonth" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="  ‹  "
+            android:textSize="22sp" android:textColor="@color/textSecondary" android:padding="8dp"/>
+        <TextView android:id="@+id/tvMonth" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textColor="@color/textSecondary" android:textSize="16sp"/>
+        <TextView android:id="@+id/btnNextMonth" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="  ›  "
+            android:textSize="22sp" android:textColor="@color/textSecondary" android:padding="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:padding="12dp">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="EXPENSE" android:textColor="@color/textPrimary" android:textSize="11sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/tvTotalExpense" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="S$0.00"
+                android:textColor="@color/expenseRed" android:textSize="13sp" android:layout_marginTop="2dp"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="INCOME" android:textColor="@color/textPrimary" android:textSize="11sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/tvTotalIncome" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="S$0.00"
+                android:textColor="@color/incomeGreen" android:textSize="13sp" android:layout_marginTop="2dp"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="TOTAL" android:textColor="@color/textPrimary" android:textSize="11sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/tvTotal" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="S$0.00"
+                android:textColor="@color/incomeGreen" android:textSize="13sp" android:layout_marginTop="2dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/dividerColor"/>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_margin="16dp"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp"
+                android:background="@color/dividerColor" android:layout_marginVertical="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

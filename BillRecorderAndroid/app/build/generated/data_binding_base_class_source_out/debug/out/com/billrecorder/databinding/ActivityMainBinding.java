@@ -4,15 +4,14 @@ package com.billrecorder.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.billrecorder.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -22,24 +21,16 @@ public final class ActivityMainBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final Button btnGrantPermission;
+  public final BottomNavigationView bottomNav;
 
   @NonNull
-  public final RecyclerView recyclerView;
+  public final FrameLayout fragmentContainer;
 
-  @NonNull
-  public final TextView tvBalance;
-
-  @NonNull
-  public final TextView tvStatus;
-
-  private ActivityMainBinding(@NonNull LinearLayout rootView, @NonNull Button btnGrantPermission,
-      @NonNull RecyclerView recyclerView, @NonNull TextView tvBalance, @NonNull TextView tvStatus) {
+  private ActivityMainBinding(@NonNull LinearLayout rootView,
+      @NonNull BottomNavigationView bottomNav, @NonNull FrameLayout fragmentContainer) {
     this.rootView = rootView;
-    this.btnGrantPermission = btnGrantPermission;
-    this.recyclerView = recyclerView;
-    this.tvBalance = tvBalance;
-    this.tvStatus = tvStatus;
+    this.bottomNav = bottomNav;
+    this.fragmentContainer = fragmentContainer;
   }
 
   @Override
@@ -69,32 +60,19 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btnGrantPermission;
-      Button btnGrantPermission = ViewBindings.findChildViewById(rootView, id);
-      if (btnGrantPermission == null) {
+      id = R.id.bottomNav;
+      BottomNavigationView bottomNav = ViewBindings.findChildViewById(rootView, id);
+      if (bottomNav == null) {
         break missingId;
       }
 
-      id = R.id.recyclerView;
-      RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
-      if (recyclerView == null) {
+      id = R.id.fragmentContainer;
+      FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
+      if (fragmentContainer == null) {
         break missingId;
       }
 
-      id = R.id.tvBalance;
-      TextView tvBalance = ViewBindings.findChildViewById(rootView, id);
-      if (tvBalance == null) {
-        break missingId;
-      }
-
-      id = R.id.tvStatus;
-      TextView tvStatus = ViewBindings.findChildViewById(rootView, id);
-      if (tvStatus == null) {
-        break missingId;
-      }
-
-      return new ActivityMainBinding((LinearLayout) rootView, btnGrantPermission, recyclerView,
-          tvBalance, tvStatus);
+      return new ActivityMainBinding((LinearLayout) rootView, bottomNav, fragmentContainer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,41 +1,101 @@
 package com.billrecorder
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
 import java.util.Locale
 
-class TransactionAdapter(private var transactions: List<Transaction>) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
+sealed class ListItem {
+    data class Header(val dateStr: String) : ListItem()
+    data class Txn(val transaction: Transaction) : ListItem()
+}
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class TransactionAdapter(
+    private var items: List<ListItem>,
+    private val onItemClick: (Transaction) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val TYPE_HEADER = 0
+    private val TYPE_TXN = 1
+
+    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvDateHeader: TextView = view.findViewById(R.id.tvDateHeader)
+    }
+
+    class TxnViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val cvIconBg: CardView = view.findViewById(R.id.cvIconBg)
         val tvTitle: TextView = view.findViewById(R.id.tvTitle)
-        val tvDate: TextView = view.findViewById(R.id.tvDate)
+        val tvBank: TextView = view.findViewById(R.id.tvBank)
         val tvAmount: TextView = view.findViewById(R.id.tvAmount)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_transaction, parent, false)
-        return ViewHolder(view)
+    override fun getItemViewType(position: Int) = when (items[position]) {
+        is ListItem.Header -> TYPE_HEADER
+        is ListItem.Txn -> TYPE_TXN
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val txn = transactions[position]
-        holder.tvTitle.text = txn.title
-        holder.tvDate.text = txn.date
-        
-        val sign = if (txn.isIncome) "+" else "-"
-        val colorRes = if (txn.isIncome) R.color.incomeGreen else R.color.expenseRed
-        holder.tvAmount.setTextColor(ContextCompat.getColor(holder.itemView.context, colorRes))
-        holder.tvAmount.text = String.format(Locale.getDefault(), "%s$%.2f", sign, txn.amount)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == TYPE_HEADER) {
+            HeaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_date_header, parent, false))
+        } else {
+            TxnViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_transaction, parent, false))
+        }
     }
 
-    override fun getItemCount() = transactions.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val item = items[position]
+        if (holder is HeaderViewHolder && item is ListItem.Header) {
+            holder.tvDateHeader.text = item.dateStr
+        } else if (holder is TxnViewHolder && item is ListItem.Txn) {
+            val txn = item.transaction
+            holder.tvTitle.text = txn.title
 
-    fun updateData(newTransactions: List<Transaction>) {
-        transactions = newTransactions
+            // Category color from DataManager
+            val cat = DataManager.getCategoryById(txn.categoryId)
+            val colorHex = cat?.colorHex ?: (if (txn.isIncome) "#77C388" else "#E26C59")
+            holder.cvIconBg.setCardBackgroundColor(Color.parseColor(colorHex))
+
+            // Bank/account tag
+            val acc = DataManager.getAccountById(txn.accountId)
+            holder.tvBank.text = acc?.name?.lowercase() ?: txn.accountId.ifEmpty { "bank" }
+
+            val sign = if (txn.isIncome) "+" else "-"
+            val amtColor = if (txn.isIncome) "#77C388" else "#E26C59"
+            holder.tvAmount.setTextColor(Color.parseColor(amtColor))
+            holder.tvAmount.text = "${sign}S${"%.2f".format(txn.amount)}"
+
+            holder.itemView.setOnClickListener { onItemClick(txn) }
+        }
+    }
+
+    override fun getItemCount() = items.size
+
+    fun updateData(transactions: List<Transaction>) {
+        items = buildItems(transactions)
         notifyDataSetChanged()
+    }
+
+    companion object {
+        private fun buildItems(transactions: List<Transaction>): List<ListItem> {
+            val result = mutableListOf<ListItem>()
+            val sdfIn = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+            val sdfGroup = SimpleDateFormat("MMM dd, EEEE", Locale.getDefault())
+            var currentDate = ""
+            transactions.forEach { txn ->
+                val parsed = try { sdfIn.parse(txn.date) } catch (e: Exception) { null }
+                val dateStr = if (parsed != null) sdfGroup.format(parsed) else txn.date.take(10)
+                if (dateStr != currentDate) {
+                    result.add(ListItem.Header(dateStr))
+                    currentDate = dateStr
+                }
+                result.add(ListItem.Txn(txn))
+            }
+            return result
+        }
     }
 }

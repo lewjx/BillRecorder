@@ -1,12 +1,10 @@
 package com.billrecorder
 
 import android.app.Notification
-import android.content.Context
 import android.content.Intent
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
-import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -16,92 +14,88 @@ import java.util.regex.Pattern
 
 class BillNotificationService : NotificationListenerService() {
 
+    override fun onListenerConnected() {
+        super.onListenerConnected()
+        DataManager.init(applicationContext)
+    }
+
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
         if (sbn == null) return
 
+        DataManager.init(applicationContext)
+
         val packageName = sbn.packageName
         val extras = sbn.notification.extras
-        
         val title = extras.getString(Notification.EXTRA_TITLE) ?: ""
         val text = extras.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: ""
         val bigText = extras.getCharSequence(Notification.EXTRA_BIG_TEXT)?.toString() ?: ""
         val ticker = sbn.notification.tickerText?.toString() ?: ""
-        
         val fullContent = "$title $text $bigText $ticker"
 
-        // Expanded currency regex (RM, $, SGD, S$) capturing the numeric amount
-        val moneyRegex = Pattern.compile("(?:RM|SGD|S\\$|\\$)\\s?(\\d+(?:\\.\\d{1,2})?)", Pattern.CASE_INSENSITIVE)
+        val moneyRegex = Pattern.compile("(?:RM|SGD|S\\$|\\$)\\s?(\\d+(?:,\\d{3})*(?:\\.\\d{1,2})?)", Pattern.CASE_INSENSITIVE)
         val matcher = moneyRegex.matcher(fullContent)
-        
-        // Keywords for testing via Gmail/SMS
-        val keywordRegex = Pattern.compile("(paid|transfer|transaction|receipt)", Pattern.CASE_INSENSITIVE)
-        
-        val isTargetApp = packageName.contains("bank", ignoreCase = true) || 
-                          packageName.contains("ocbc", ignoreCase = true) ||
-                          packageName.contains("com.google.android.gm")
-        
-        if (matcher.find() || keywordRegex.matcher(fullContent).find() || isTargetApp) {
-            
-            var amount = 0.0
-            // If the regex matched an amount, parse it
-            if (matcher.reset().find()) {
-                val amountStr = matcher.group(1)?.replace(",", "") ?: "0"
-                amount = amountStr.toDoubleOrNull() ?: 0.0
-            } else if (isTargetApp) {
-                // For testing target apps without explicit amounts, we'll mock an amount if it's 0
-                // Wait, it's better to only log transactions that actually have a parseable amount
-                // But for debug purposes, we will default to 0.0
-            }
 
-            // Simple Income vs Expense Logic
-            // If the notification says "received", "credited", it's income. Otherwise default to expense.
-            val isIncome = fullContent.contains("received", ignoreCase = true) ||
-                           fullContent.contains("credited", ignoreCase = true) ||
-                           fullContent.contains("inward", ignoreCase = true)
+        val isTargetApp = packageName.contains("bank", ignoreCase = true) ||
+                packageName.contains("ocbc", ignoreCase = true) ||
+                packageName.contains("dbs", ignoreCase = true) ||
+                packageName.contains("uob", ignoreCase = true) ||
+                packageName.contains("com.google.android.gm")
 
-            // If it's 0 amount and not from a target testing app, skip it to avoid noise
-            if (amount == 0.0 && !isTargetApp) return
+        if (!matcher.find() && !isTargetApp) return
 
-            val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
-            val appTitle = if (title.isBlank()) packageName else title
+        val amount = if (matcher.reset().find()) {
+            matcher.group(1)?.replace(",", "")?.toDoubleOrNull() ?: 0.0
+        } else 0.0
 
-            val transactionObj = JSONObject().apply {
-                put("id", UUID.randomUUID().toString())
-                put("title", appTitle)
-                put("date", timestamp)
-                put("amount", amount)
-                put("isIncome", isIncome)
-                put("rawText", fullContent)
-            }
-            
-            Log.d("BillRecorder", transactionObj.toString())
-            saveTransaction(transactionObj)
-            
-            // Broadcast to MainActivity to refresh UI instantly
-            sendBroadcast(Intent("com.billrecorder.NEW_BILL"))
+        if (amount == 0.0 && !isTargetApp) return
+
+        val isIncome = fullContent.contains("received", ignoreCase = true) ||
+                fullContent.contains("credited", ignoreCase = true) ||
+                fullContent.contains("inward", ignoreCase = true)
+
+        // Auto-detect category from content keywords
+        val categoryId = when {
+            fullContent.contains("food", ignoreCase = true) ||
+            fullContent.contains("restaurant", ignoreCase = true) ||
+            fullContent.contains("grab", ignoreCase = true) -> "food_exp"
+            fullContent.contains("transport", ignoreCase = true) ||
+            fullContent.contains("mrt", ignoreCase = true) ||
+            fullContent.contains("bus", ignoreCase = true) -> "transport_exp"
+            fullContent.contains("grocery", ignoreCase = true) ||
+            fullContent.contains("ntuc", ignoreCase = true) ||
+            fullContent.contains("cold storage", ignoreCase = true) -> "grocery_exp"
+            fullContent.contains("shopping", ignoreCase = true) ||
+            fullContent.contains("lazada", ignoreCase = true) ||
+            fullContent.contains("shopee", ignoreCase = true) -> "shopping_exp"
+            fullContent.contains("salary", ignoreCase = true) -> "salary_inc"
+            fullContent.contains("transfer", ignoreCase = true) -> if (isIncome) "transfer_inc" else "others_exp"
+            else -> if (isIncome) "salary_inc" else "others_exp"
         }
+
+        val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
+        val txnTitle = if (title.isBlank()) packageName else title
+
+        val txn = Transaction(
+            id = UUID.randomUUID().toString(),
+            title = txnTitle,
+            date = timestamp,
+            amount = amount,
+            isIncome = isIncome,
+            categoryId = categoryId,
+            accountId = inferAccountId(packageName),
+            note = "",
+            rawText = fullContent.take(300)
+        )
+
+        Log.d("BillRecorder", txn.toString())
+        DataManager.addTransaction(txn)
+        DataManager.updateAccountBalance(txn.accountId, if (isIncome) amount else -amount)
+        sendBroadcast(Intent("com.billrecorder.NEW_BILL"))
     }
 
-    private fun saveTransaction(transaction: JSONObject) {
-        val prefs = getSharedPreferences("BillLogs", Context.MODE_PRIVATE)
-        val historyStr = prefs.getString("transactions", "[]") ?: "[]"
-        
-        try {
-            val jsonArray = JSONArray(historyStr)
-            jsonArray.put(transaction)
-            
-            // Keep history to last 500 to prevent massive SharedPreferences bloat
-            var finalArray = jsonArray
-            if (jsonArray.length() > 500) {
-                finalArray = JSONArray()
-                for (i in jsonArray.length() - 500 until jsonArray.length()) {
-                    finalArray.put(jsonArray.getJSONObject(i))
-                }
-            }
-            prefs.edit().putString("transactions", finalArray.toString()).apply()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    private fun inferAccountId(packageName: String): String {
+        val accounts = DataManager.getAccounts()
+        return accounts.find { packageName.contains(it.name, ignoreCase = true) }?.id ?: ""
     }
 }

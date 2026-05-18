@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="background">#F5F7FA</color>
-    <color name="cardBackground">#FFFFFF</color>
-    <color name="textPrimary">#2D3748</color>
-    <color name="textSecondary">#718096</color>
-    <color name="incomeGreen">#38A169</color>
-    <color name="expenseRed">#E53E3E</color>
+    <!-- MyMoney Theme Colors -->
+    <color name="bgDark">#403F3B</color>
+    <color name="bgList">#494844</color>
+    <color name="textPrimary">#F1E3A1</color>
+    <color name="textSecondary">#FFF9DE</color>
+    <color name="incomeGreen">#77C388</color>
+    <color name="expenseRed">#E26C59</color>
+    <color name="fabColor">#585753</color>
+    <color name="dividerColor">#8E8C82</color>
 </resources>
