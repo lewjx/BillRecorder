@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgDark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:padding="16dp" android:gravity="center_vertical">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="MyMoney" android:textStyle="bold"
+                android:textSize="22sp" android:textColor="@color/textPrimary"/>
+            <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_search" app:tint="@color/textPrimary"/>
+        </LinearLayout>
+
+        <!-- Month Selector -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center" android:paddingVertical="4dp">
+            <TextView android:id="@+id/btnPrevMonth" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="  ‹  "
+                android:textSize="22sp" android:textColor="@color/textSecondary" android:padding="8dp"/>
+            <TextView android:id="@+id/tvMonth" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="May, 2026"
+                android:textColor="@color/textSecondary" android:textSize="16sp"/>
+            <TextView android:id="@+id/btnNextMonth" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="  ›  "
+                android:textSize="22sp" android:textColor="@color/textSecondary" android:padding="8dp"/>
+        </LinearLayout>
+
+        <!-- Stats Header -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:padding="12dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="EXPENSE" android:textColor="@color/textPrimary"
+                    android:textSize="11sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvTotalExpense" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="S$0.00"
+                    android:textColor="@color/expenseRed" android:textSize="13sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="INCOME" android:textColor="@color/textPrimary"
+                    android:textSize="11sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvTotalIncome" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="S$0.00"
+                    android:textColor="@color/incomeGreen" android:textSize="13sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="TOTAL" android:textColor="@color/textPrimary"
+                    android:textSize="11sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvTotal" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="S$0.00"
+                    android:textColor="@color/incomeGreen" android:textSize="13sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/dividerColor"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"/>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/fabColor"
+        app:tint="@color/textPrimary"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

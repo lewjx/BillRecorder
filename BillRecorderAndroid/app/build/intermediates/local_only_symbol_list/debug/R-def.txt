@@ -68,6 +68,7 @@ id tvTotalBudget
 id tvTotalExpense
 id tvTotalIncome
 id tvTotalSpent
+id tvTypeBadge
 layout activity_main
 layout dialog_add_transaction
 layout fragment_accounts

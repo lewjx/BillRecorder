@@ -3545,6 +3545,7 @@ id tvTotalBudget
 id tvTotalExpense
 id tvTotalIncome
 id tvTotalSpent
+id tvTypeBadge
 id unchecked
 id uniform
 id unlabeled

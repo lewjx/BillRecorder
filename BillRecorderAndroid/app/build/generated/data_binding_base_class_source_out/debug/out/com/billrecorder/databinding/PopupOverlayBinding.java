@@ -39,9 +39,12 @@ public final class PopupOverlayBinding implements ViewBinding {
   @NonNull
   public final TextView tvPopupAmount;
 
+  @NonNull
+  public final TextView tvTypeBadge;
+
   private PopupOverlayBinding(@NonNull LinearLayout rootView, @NonNull Button btnPopupDiscard,
       @NonNull Button btnPopupSave, @NonNull EditText etPopupLabel, @NonNull EditText etPopupNote,
-      @NonNull TextView tvClose, @NonNull TextView tvPopupAmount) {
+      @NonNull TextView tvClose, @NonNull TextView tvPopupAmount, @NonNull TextView tvTypeBadge) {
     this.rootView = rootView;
     this.btnPopupDiscard = btnPopupDiscard;
     this.btnPopupSave = btnPopupSave;
@@ -49,6 +52,7 @@ public final class PopupOverlayBinding implements ViewBinding {
     this.etPopupNote = etPopupNote;
     this.tvClose = tvClose;
     this.tvPopupAmount = tvPopupAmount;
+    this.tvTypeBadge = tvTypeBadge;
   }
 
   @Override
@@ -114,8 +118,14 @@ public final class PopupOverlayBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvTypeBadge;
+      TextView tvTypeBadge = ViewBindings.findChildViewById(rootView, id);
+      if (tvTypeBadge == null) {
+        break missingId;
+      }
+
       return new PopupOverlayBinding((LinearLayout) rootView, btnPopupDiscard, btnPopupSave,
-          etPopupLabel, etPopupNote, tvClose, tvPopupAmount);
+          etPopupLabel, etPopupNote, tvClose, tvPopupAmount, tvTypeBadge);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

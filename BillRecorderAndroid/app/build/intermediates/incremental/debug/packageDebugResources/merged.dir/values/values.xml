@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bgDark">#403F3B</color>
+    <color name="bgList">#494844</color>
+    <color name="dividerColor">#8E8C82</color>
+    <color name="expenseRed">#E26C59</color>
+    <color name="fabColor">#585753</color>
+    <color name="incomeGreen">#77C388</color>
+    <color name="textPrimary">#F1E3A1</color>
+    <color name="textSecondary">#FFF9DE</color>
+    <string name="app_name">BillRecorder</string>
+    <style name="Theme.BillRecorder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/textPrimary</item>
+        <item name="colorPrimaryVariant">@color/textPrimary</item>
+        <item name="colorOnPrimary">@color/bgDark</item>
+        
+        
+        <item name="colorSecondary">@color/textPrimary</item>
+        <item name="colorSecondaryVariant">@color/textPrimary</item>
+        <item name="colorOnSecondary">@color/bgDark</item>
+        
+        
+        <item name="android:colorBackground">@color/bgDark</item>
+        <item name="colorSurface">@color/bgList</item>
+        <item name="android:statusBarColor">@color/bgDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
