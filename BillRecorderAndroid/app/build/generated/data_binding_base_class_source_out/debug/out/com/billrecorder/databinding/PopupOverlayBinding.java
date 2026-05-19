@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,7 @@ import java.lang.String;
 
 public final class PopupOverlayBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
   public final Button btnPopupDiscard;
@@ -34,6 +35,12 @@ public final class PopupOverlayBinding implements ViewBinding {
   public final EditText etPopupNote;
 
   @NonNull
+  public final Spinner spinnerPopupAccount;
+
+  @NonNull
+  public final Spinner spinnerPopupCategory;
+
+  @NonNull
   public final TextView tvClose;
 
   @NonNull
@@ -42,14 +49,17 @@ public final class PopupOverlayBinding implements ViewBinding {
   @NonNull
   public final TextView tvTypeBadge;
 
-  private PopupOverlayBinding(@NonNull LinearLayout rootView, @NonNull Button btnPopupDiscard,
+  private PopupOverlayBinding(@NonNull ScrollView rootView, @NonNull Button btnPopupDiscard,
       @NonNull Button btnPopupSave, @NonNull EditText etPopupLabel, @NonNull EditText etPopupNote,
+      @NonNull Spinner spinnerPopupAccount, @NonNull Spinner spinnerPopupCategory,
       @NonNull TextView tvClose, @NonNull TextView tvPopupAmount, @NonNull TextView tvTypeBadge) {
     this.rootView = rootView;
     this.btnPopupDiscard = btnPopupDiscard;
     this.btnPopupSave = btnPopupSave;
     this.etPopupLabel = etPopupLabel;
     this.etPopupNote = etPopupNote;
+    this.spinnerPopupAccount = spinnerPopupAccount;
+    this.spinnerPopupCategory = spinnerPopupCategory;
     this.tvClose = tvClose;
     this.tvPopupAmount = tvPopupAmount;
     this.tvTypeBadge = tvTypeBadge;
@@ -57,7 +67,7 @@ public final class PopupOverlayBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -106,6 +116,18 @@ public final class PopupOverlayBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.spinnerPopupAccount;
+      Spinner spinnerPopupAccount = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerPopupAccount == null) {
+        break missingId;
+      }
+
+      id = R.id.spinnerPopupCategory;
+      Spinner spinnerPopupCategory = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerPopupCategory == null) {
+        break missingId;
+      }
+
       id = R.id.tvClose;
       TextView tvClose = ViewBindings.findChildViewById(rootView, id);
       if (tvClose == null) {
@@ -124,8 +146,9 @@ public final class PopupOverlayBinding implements ViewBinding {
         break missingId;
       }
 
-      return new PopupOverlayBinding((LinearLayout) rootView, btnPopupDiscard, btnPopupSave,
-          etPopupLabel, etPopupNote, tvClose, tvPopupAmount, tvTypeBadge);
+      return new PopupOverlayBinding((ScrollView) rootView, btnPopupDiscard, btnPopupSave,
+          etPopupLabel, etPopupNote, spinnerPopupAccount, spinnerPopupCategory, tvClose,
+          tvPopupAmount, tvTypeBadge);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

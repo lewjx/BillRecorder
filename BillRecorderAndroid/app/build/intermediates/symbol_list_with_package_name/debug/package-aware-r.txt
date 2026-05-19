@@ -3454,6 +3454,8 @@ id spacer
 id special_effects_controller_view_tag
 id spinnerAccount
 id spinnerCategory
+id spinnerPopupAccount
+id spinnerPopupCategory
 id spline
 id split_action_bar
 id spread
@@ -3532,6 +3534,7 @@ id tvCatIcon
 id tvCatName
 id tvCatPercent
 id tvClose
+id tvCurrentBudget
 id tvDateHeader
 id tvExpenseSoFar
 id tvIcon

@@ -53,6 +53,7 @@ class BudgetsFragment : Fragment() {
                 val cvIcon: CardView = v.findViewById(R.id.cvIcon)
                 val tvIcon: TextView = v.findViewById(R.id.tvIcon)
                 val tvName: TextView = v.findViewById(R.id.tvCatName)
+                val tvCurrentBudget: TextView = v.findViewById(R.id.tvCurrentBudget)
                 val btnSet: Button = v.findViewById(R.id.btnSetBudget)
             }
 
@@ -74,7 +75,16 @@ class BudgetsFragment : Fragment() {
                 bvh.tvIcon.text = categoryEmojis[cat.iconName] ?: "💰"
                 android.graphics.Color.parseColor(cat.colorHex).let { bvh.cvIcon.setCardBackgroundColor(it) }
                 bvh.tvName.text = cat.name
-                bvh.btnSet.text = if (existing != null) "S$%.2f".format(existing.limit) else "SET BUDGET"
+                
+                if (existing != null) {
+                    bvh.tvCurrentBudget.visibility = View.VISIBLE
+                    bvh.tvCurrentBudget.text = "S$%.2f".format(existing.limit)
+                    bvh.btnSet.text = "EDIT"
+                } else {
+                    bvh.tvCurrentBudget.visibility = View.GONE
+                    bvh.btnSet.text = "SET BUDGET"
+                }
+                
                 bvh.btnSet.setOnClickListener { showSetBudgetDialog(cat, existing) }
             }
         }

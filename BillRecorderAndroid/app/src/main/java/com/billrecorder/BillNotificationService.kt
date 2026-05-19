@@ -119,7 +119,9 @@ class BillNotificationService : NotificationListenerService() {
 
         // ── Auto-cancel the status bar notification if amount < S$50 ──────────
         if (amount < 50.0) {
-            cancelNotification(sbn.key)
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                cancelNotification(sbn.key)
+            }, 10000)
         }
 
         // ── Trigger editable floating popup for all captured transactions ─────

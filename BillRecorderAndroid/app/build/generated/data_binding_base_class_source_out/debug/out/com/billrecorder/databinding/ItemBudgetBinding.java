@@ -31,14 +31,19 @@ public final class ItemBudgetBinding implements ViewBinding {
   public final TextView tvCatName;
 
   @NonNull
+  public final TextView tvCurrentBudget;
+
+  @NonNull
   public final TextView tvIcon;
 
   private ItemBudgetBinding(@NonNull LinearLayout rootView, @NonNull Button btnSetBudget,
-      @NonNull CardView cvIcon, @NonNull TextView tvCatName, @NonNull TextView tvIcon) {
+      @NonNull CardView cvIcon, @NonNull TextView tvCatName, @NonNull TextView tvCurrentBudget,
+      @NonNull TextView tvIcon) {
     this.rootView = rootView;
     this.btnSetBudget = btnSetBudget;
     this.cvIcon = cvIcon;
     this.tvCatName = tvCatName;
+    this.tvCurrentBudget = tvCurrentBudget;
     this.tvIcon = tvIcon;
   }
 
@@ -87,6 +92,12 @@ public final class ItemBudgetBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvCurrentBudget;
+      TextView tvCurrentBudget = ViewBindings.findChildViewById(rootView, id);
+      if (tvCurrentBudget == null) {
+        break missingId;
+      }
+
       id = R.id.tvIcon;
       TextView tvIcon = ViewBindings.findChildViewById(rootView, id);
       if (tvIcon == null) {
@@ -94,7 +105,7 @@ public final class ItemBudgetBinding implements ViewBinding {
       }
 
       return new ItemBudgetBinding((LinearLayout) rootView, btnSetBudget, cvIcon, tvCatName,
-          tvIcon);
+          tvCurrentBudget, tvIcon);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -6,13 +6,15 @@ import android.graphics.Color
 import android.graphics.PixelFormat
 import android.os.IBinder
 import android.provider.Settings
+import android.view.ContextThemeWrapper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
 
 class PopupOverlayService : Service() {
@@ -32,8 +34,12 @@ class PopupOverlayService : Service() {
 
         dismiss()
 
-        windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
-        overlayView = LayoutInflater.from(this).inflate(R.layout.popup_overlay, null)
+        // Wrap Context with Theme so theme colors / dropdown style apply perfectly
+        val themedContext = ContextThemeWrapper(this, R.style.Theme_BillRecorder)
+        windowManager = themedContext.getSystemService(WINDOW_SERVICE) as WindowManager
+        overlayView = LayoutInflater.from(themedContext).inflate(R.layout.popup_overlay, null)
+
+        val txn = DataManager.getTransactions().find { it.id == txnId }
 
         overlayView?.apply {
             // Amount (read-only)
@@ -50,6 +56,36 @@ class PopupOverlayService : Service() {
             val etLabel = findViewById<EditText>(R.id.etPopupLabel)
             etLabel.setText(title)
 
+            // Populate Spinners using themedContext
+            val categories = DataManager.getCategories().filter {
+                it.type.equals(if (isIncome) "income" else "expense", true)
+            }
+            val catNames = categories.map { it.name }
+            val spinnerCat = findViewById<Spinner>(R.id.spinnerPopupCategory)
+            val catAdapter = ArrayAdapter(themedContext, android.R.layout.simple_spinner_item, catNames).apply {
+                setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+            spinnerCat.adapter = catAdapter
+
+            val accounts = DataManager.getAccounts()
+            val accNames = accounts.map { it.name }.ifEmpty { listOf("No accounts") }
+            val spinnerAcc = findViewById<Spinner>(R.id.spinnerPopupAccount)
+            val accAdapter = ArrayAdapter(themedContext, android.R.layout.simple_spinner_item, accNames).apply {
+                setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+            spinnerAcc.adapter = accAdapter
+
+            // Select active/default values
+            txn?.let { t ->
+                val catIdx = categories.indexOfFirst { c -> c.id == t.categoryId }
+                if (catIdx >= 0) spinnerCat.setSelection(catIdx)
+
+                val accIdx = accounts.indexOfFirst { a -> a.id == t.accountId }
+                if (accIdx >= 0) spinnerAcc.setSelection(accIdx)
+
+                findViewById<EditText>(R.id.etPopupNote).setText(t.note)
+            }
+
             // Close (✕) — discards the transaction entirely
             findViewById<TextView>(R.id.tvClose).setOnClickListener {
                 DataManager.deleteTransaction(txnId)
@@ -64,14 +100,34 @@ class PopupOverlayService : Service() {
                 dismiss()
             }
 
-            // Save button — update the transaction with edited label + note
+            // Save button — update the transaction with edited label, category, account, and note
             findViewById<Button>(R.id.btnPopupSave).setOnClickListener {
                 val newLabel = etLabel.text.toString().trim().ifEmpty { title }
                 val newNote  = findViewById<EditText>(R.id.etPopupNote).text.toString().trim()
+                val selectedCat = categories.getOrNull(spinnerCat.selectedItemPosition)
+                val selectedAcc = accounts.getOrNull(spinnerAcc.selectedItemPosition)
 
-                val txn = DataManager.getTransactions().find { it.id == txnId }
-                txn?.let {
-                    DataManager.updateTransaction(it.copy(title = newLabel, note = newNote))
+                txn?.let { oldTxn ->
+                    val updatedAmount = oldTxn.amount
+                    val updatedIsIncome = oldTxn.isIncome
+
+                    // If account changed, reconcile the balances
+                    if (oldTxn.accountId != selectedAcc?.id) {
+                        if (oldTxn.accountId.isNotEmpty()) {
+                            DataManager.updateAccountBalance(oldTxn.accountId, if (updatedIsIncome) -updatedAmount else updatedAmount)
+                        }
+                        selectedAcc?.let { acc ->
+                            DataManager.updateAccountBalance(acc.id, if (updatedIsIncome) updatedAmount else -updatedAmount)
+                        }
+                    }
+
+                    val updatedTxn = oldTxn.copy(
+                        title = newLabel,
+                        note = newNote,
+                        categoryId = selectedCat?.id ?: oldTxn.categoryId,
+                        accountId = selectedAcc?.id ?: oldTxn.accountId
+                    )
+                    DataManager.updateTransaction(updatedTxn)
                     sendBroadcast(Intent("com.billrecorder.NEW_BILL"))
                 }
                 dismiss()
@@ -87,8 +143,7 @@ class PopupOverlayService : Service() {
                     WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
             PixelFormat.TRANSLUCENT
         ).apply {
-            gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
-            y = 100
+            gravity = Gravity.CENTER
         }
 
         windowManager?.addView(overlayView, params)

@@ -44,6 +44,8 @@ id rvBudgets
 id rvCategories
 id spinnerAccount
 id spinnerCategory
+id spinnerPopupAccount
+id spinnerPopupCategory
 id tvAccountBalance
 id tvAccountMenu
 id tvAccountName
@@ -55,6 +57,7 @@ id tvCatIcon
 id tvCatName
 id tvCatPercent
 id tvClose
+id tvCurrentBudget
 id tvDateHeader
 id tvExpenseSoFar
 id tvIcon

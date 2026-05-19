@@ -1,78 +1,82 @@
 [
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_activity_main.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/activity_main.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_popup_overlay.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\popup_overlay.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/drawable_input_bg.xml.flat",
-        "source": "com.billrecorder.app-main-39:/drawable/input_bg.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_fragment_records.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\fragment_records.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_fragment_records.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/fragment_records.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_item_account.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\item_account.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_item_budget.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/item_budget.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_item_date_header.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\item_date_header.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_fragment_categories.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/fragment_categories.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\drawable_btn_outline_drawable.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\drawable\\btn_outline_drawable.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_item_category.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\item_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_item_transaction.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\item_transaction.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\color_nav_color_selector.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\color\\nav_color_selector.xml"
     },
     {
         "merged": "com.billrecorder.app-merged_res-37:/layout_popup_overlay.xml.flat",
         "source": "com.billrecorder.app-main-39:/layout/popup_overlay.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_item_category.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/item_category.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_fragment_accounts.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\fragment_accounts.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_fragment_analysis.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/fragment_analysis.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\drawable_input_bg.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\drawable\\input_bg.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_item_analysis_row.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/item_analysis_row.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_fragment_categories.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\fragment_categories.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/drawable_btn_outline_drawable.xml.flat",
-        "source": "com.billrecorder.app-main-39:/drawable/btn_outline_drawable.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/drawable_popup_bg.xml.flat",
-        "source": "com.billrecorder.app-main-39:/drawable/popup_bg.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_dialog_add_transaction.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\dialog_add_transaction.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_dialog_add_transaction.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/dialog_add_transaction.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_fragment_budgets.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\fragment_budgets.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_item_date_header.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/item_date_header.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\menu\\bottom_nav_menu.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_item_transaction.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/item_transaction.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_item_budget.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\item_budget.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_fragment_budgets.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/fragment_budgets.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\drawable_popup_bg.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\drawable\\popup_bg.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_item_account.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/item_account.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_fragment_analysis.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\fragment_analysis.xml"
     },
     {
-        "merged": "com.billrecorder.app-merged_res-37:/menu_bottom_nav_menu.xml.flat",
-        "source": "com.billrecorder.app-main-39:/menu/bottom_nav_menu.xml"
-    },
-    {
-        "merged": "com.billrecorder.app-merged_res-37:/color_nav_color_selector.xml.flat",
-        "source": "com.billrecorder.app-main-39:/color/nav_color_selector.xml"
-    },
-    {
-        "merged": "com.billrecorder.app-merged_res-37:/layout_fragment_accounts.xml.flat",
-        "source": "com.billrecorder.app-main-39:/layout/fragment_accounts.xml"
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-merged_res-37:\\layout_item_analysis_row.xml.flat",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.9\\com.billrecorder.app-main-39:\\layout\\item_analysis_row.xml"
     }
 ]
