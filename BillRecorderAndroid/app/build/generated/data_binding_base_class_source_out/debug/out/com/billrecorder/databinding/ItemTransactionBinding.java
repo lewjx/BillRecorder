@@ -4,6 +4,7 @@ package com.billrecorder.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -24,20 +25,33 @@ public final class ItemTransactionBinding implements ViewBinding {
   public final CardView cvIconBg;
 
   @NonNull
+  public final ImageView ivDefaultIcon;
+
+  @NonNull
+  public final ImageView ivIcon;
+
+  @NonNull
   public final TextView tvAmount;
 
   @NonNull
   public final TextView tvBank;
 
   @NonNull
+  public final TextView tvEmojiFallback;
+
+  @NonNull
   public final TextView tvTitle;
 
   private ItemTransactionBinding(@NonNull LinearLayout rootView, @NonNull CardView cvIconBg,
-      @NonNull TextView tvAmount, @NonNull TextView tvBank, @NonNull TextView tvTitle) {
+      @NonNull ImageView ivDefaultIcon, @NonNull ImageView ivIcon, @NonNull TextView tvAmount,
+      @NonNull TextView tvBank, @NonNull TextView tvEmojiFallback, @NonNull TextView tvTitle) {
     this.rootView = rootView;
     this.cvIconBg = cvIconBg;
+    this.ivDefaultIcon = ivDefaultIcon;
+    this.ivIcon = ivIcon;
     this.tvAmount = tvAmount;
     this.tvBank = tvBank;
+    this.tvEmojiFallback = tvEmojiFallback;
     this.tvTitle = tvTitle;
   }
 
@@ -74,6 +88,18 @@ public final class ItemTransactionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ivDefaultIcon;
+      ImageView ivDefaultIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivDefaultIcon == null) {
+        break missingId;
+      }
+
+      id = R.id.ivIcon;
+      ImageView ivIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivIcon == null) {
+        break missingId;
+      }
+
       id = R.id.tvAmount;
       TextView tvAmount = ViewBindings.findChildViewById(rootView, id);
       if (tvAmount == null) {
@@ -86,14 +112,20 @@ public final class ItemTransactionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvEmojiFallback;
+      TextView tvEmojiFallback = ViewBindings.findChildViewById(rootView, id);
+      if (tvEmojiFallback == null) {
+        break missingId;
+      }
+
       id = R.id.tvTitle;
       TextView tvTitle = ViewBindings.findChildViewById(rootView, id);
       if (tvTitle == null) {
         break missingId;
       }
 
-      return new ItemTransactionBinding((LinearLayout) rootView, cvIconBg, tvAmount, tvBank,
-          tvTitle);
+      return new ItemTransactionBinding((LinearLayout) rootView, cvIconBg, ivDefaultIcon, ivIcon,
+          tvAmount, tvBank, tvEmojiFallback, tvTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

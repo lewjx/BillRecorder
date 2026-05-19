@@ -15,9 +15,24 @@
         android:layout_height="40dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/expenseRed"
+        app:cardBackgroundColor="@android:color/transparent"
         android:id="@+id/cvIconBg">
         <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvEmojiFallback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/ivDefaultIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"

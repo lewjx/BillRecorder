@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -28,6 +29,9 @@ public final class ItemBudgetBinding implements ViewBinding {
   public final CardView cvIcon;
 
   @NonNull
+  public final ImageView ivIcon;
+
+  @NonNull
   public final TextView tvCatName;
 
   @NonNull
@@ -37,11 +41,12 @@ public final class ItemBudgetBinding implements ViewBinding {
   public final TextView tvIcon;
 
   private ItemBudgetBinding(@NonNull LinearLayout rootView, @NonNull Button btnSetBudget,
-      @NonNull CardView cvIcon, @NonNull TextView tvCatName, @NonNull TextView tvCurrentBudget,
-      @NonNull TextView tvIcon) {
+      @NonNull CardView cvIcon, @NonNull ImageView ivIcon, @NonNull TextView tvCatName,
+      @NonNull TextView tvCurrentBudget, @NonNull TextView tvIcon) {
     this.rootView = rootView;
     this.btnSetBudget = btnSetBudget;
     this.cvIcon = cvIcon;
+    this.ivIcon = ivIcon;
     this.tvCatName = tvCatName;
     this.tvCurrentBudget = tvCurrentBudget;
     this.tvIcon = tvIcon;
@@ -86,6 +91,12 @@ public final class ItemBudgetBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ivIcon;
+      ImageView ivIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivIcon == null) {
+        break missingId;
+      }
+
       id = R.id.tvCatName;
       TextView tvCatName = ViewBindings.findChildViewById(rootView, id);
       if (tvCatName == null) {
@@ -104,7 +115,7 @@ public final class ItemBudgetBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemBudgetBinding((LinearLayout) rootView, btnSetBudget, cvIcon, tvCatName,
+      return new ItemBudgetBinding((LinearLayout) rootView, btnSetBudget, cvIcon, ivIcon, tvCatName,
           tvCurrentBudget, tvIcon);
     }
     String missingId = rootView.getResources().getResourceName(id);

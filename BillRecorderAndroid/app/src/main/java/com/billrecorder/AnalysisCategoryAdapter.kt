@@ -11,17 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class AnalysisCategoryAdapter(
     private val items: List<Pair<Category, Double>>,
-    private val totalExpense: Double
+    private val totalAmount: Double,
+    private val isIncome: Boolean
 ) : RecyclerView.Adapter<AnalysisCategoryAdapter.ViewHolder>() {
-
-    private val categoryEmojis = mapOf(
-        "food" to "🍴", "transport" to "🚌", "grocery" to "🛒", "shopping" to "🛍",
-        "entertainment" to "🎮", "bills" to "📄", "clothing" to "👕",
-        "education" to "📚", "health" to "💊", "others" to "💸"
-    )
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cvIcon: CardView = view.findViewById(R.id.cvIcon)
+        val ivIcon: android.widget.ImageView = view.findViewById(R.id.ivIcon)
         val tvCatIcon: TextView = view.findViewById(R.id.tvCatIcon)
         val tvCatName: TextView = view.findViewById(R.id.tvCatName)
         val tvCatAmount: TextView = view.findViewById(R.id.tvCatAmount)
@@ -34,13 +30,25 @@ class AnalysisCategoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val (cat, amount) = items[position]
-        val percent = if (totalExpense > 0) (amount / totalExpense * 100) else 0.0
+        val percent = if (totalAmount > 0) (amount / totalAmount * 100) else 0.0
         val color = Color.parseColor(cat.colorHex)
 
-        holder.cvIcon.setCardBackgroundColor(color)
-        holder.tvCatIcon.text = categoryEmojis[cat.iconName] ?: "💰"
+        val resId = CategoryIcons.getDrawableResId(holder.itemView.context, cat.iconName, cat.name)
+        if (resId != 0) {
+            holder.ivIcon.visibility = View.VISIBLE
+            holder.ivIcon.setImageResource(resId)
+            holder.tvCatIcon.visibility = View.GONE
+            holder.cvIcon.setCardBackgroundColor(Color.TRANSPARENT)
+        } else {
+            holder.ivIcon.visibility = View.GONE
+            holder.tvCatIcon.visibility = View.VISIBLE
+            holder.tvCatIcon.text = CategoryIcons.getEmoji(cat.iconName, cat.name)
+            holder.cvIcon.setCardBackgroundColor(color)
+        }
+
         holder.tvCatName.text = cat.name
-        holder.tvCatAmount.text = "-S$%.2f".format(amount)
+        val sign = if (isIncome) "+" else "-"
+        holder.tvCatAmount.text = "${sign}S$%.2f".format(amount)
         holder.tvCatAmount.setTextColor(color)
         holder.tvCatPercent.text = "%.2f%%".format(percent)
         holder.progressBar.progressTintList = android.content.res.ColorStateList.valueOf(color)

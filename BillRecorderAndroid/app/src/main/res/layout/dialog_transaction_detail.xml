@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="12dp"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top Header Section (Soft coral/green depending on transaction type) -->
+        <LinearLayout
+            android:id="@+id/llHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#E26C59"
+            android:padding="20dp">
+
+            <!-- Top Actions Row -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Close Button -->
+                <TextView
+                    android:id="@+id/tvClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✕"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:padding="4dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true" />
+
+                <!-- Action Icons Container (Trash & Edit) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true">
+
+                    <!-- Delete Button -->
+                    <ImageView
+                        android:id="@+id/ivDelete"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@android:drawable/ic_menu_delete"
+                        app:tint="#FFFFFF"
+                        android:padding="2dp"
+                        android:layout_marginEnd="16dp" />
+
+                    <!-- Edit Button -->
+                    <ImageView
+                        android:id="@+id/ivEdit"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@android:drawable/ic_menu_edit"
+                        app:tint="#FFFFFF"
+                        android:padding="2dp" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Transaction Type Badge Text -->
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXPENSE"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp" />
+
+            <!-- Amount Text Display -->
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-S$17.74"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Date and Time Text -->
+            <TextView
+                android:id="@+id/tvDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="May 19, 2026 1:13 AM"
+                android:textColor="#F3F3F3"
+                android:textSize="12sp"
+                android:layout_gravity="end" />
+
+        </LinearLayout>
+
+        <!-- Bottom Body Section (Dark charcoal/grey) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#3E3E3E"
+            android:padding="24dp">
+
+            <!-- Account Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Account"
+                    android:textColor="#EAD6B4"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Account Pill Border Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/input_bg"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp">
+
+                    <TextView
+                        android:id="@+id/tvAccIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💳"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvAccName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ocbc"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Category Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textColor="#EAD6B4"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Category Pill Border Container -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/input_bg"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp">
+
+                    <!-- Custom AI image loader container -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvCatIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        app:cardCornerRadius="11dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        android:layout_marginEnd="8dp">
+
+                        <ImageView
+                            android:id="@+id/ivCatIcon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter" />
+
+                        <TextView
+                            android:id="@+id/tvCatEmojiFallback"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvCatName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Description / Note centered at the bottom -->
+            <TextView
+                android:id="@+id/tvNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No notes"
+                android:textColor="#CCCCCC"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginTop="8dp" />
+
+            <!-- Confirm & Save Button (Visible only for unconfirmed notifications) -->
+            <Button
+                android:id="@+id/btnConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Confirm &amp; Save"
+                android:textColor="#3E3E3E"
+                android:textStyle="bold"
+                android:backgroundTint="#77C388"
+                android:layout_marginTop="20dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -28,6 +28,12 @@ public final class FragmentAnalysisBinding implements ViewBinding {
   public final TextView btnPrevMonth;
 
   @NonNull
+  public final TextView btnToggleExpenses;
+
+  @NonNull
+  public final TextView btnToggleIncome;
+
+  @NonNull
   public final PieChart pieChart;
 
   @NonNull
@@ -46,12 +52,15 @@ public final class FragmentAnalysisBinding implements ViewBinding {
   public final TextView tvTotalIncome;
 
   private FragmentAnalysisBinding(@NonNull LinearLayout rootView, @NonNull TextView btnNextMonth,
-      @NonNull TextView btnPrevMonth, @NonNull PieChart pieChart,
+      @NonNull TextView btnPrevMonth, @NonNull TextView btnToggleExpenses,
+      @NonNull TextView btnToggleIncome, @NonNull PieChart pieChart,
       @NonNull RecyclerView rvCategories, @NonNull TextView tvMonth, @NonNull TextView tvTotal,
       @NonNull TextView tvTotalExpense, @NonNull TextView tvTotalIncome) {
     this.rootView = rootView;
     this.btnNextMonth = btnNextMonth;
     this.btnPrevMonth = btnPrevMonth;
+    this.btnToggleExpenses = btnToggleExpenses;
+    this.btnToggleIncome = btnToggleIncome;
     this.pieChart = pieChart;
     this.rvCategories = rvCategories;
     this.tvMonth = tvMonth;
@@ -99,6 +108,18 @@ public final class FragmentAnalysisBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnToggleExpenses;
+      TextView btnToggleExpenses = ViewBindings.findChildViewById(rootView, id);
+      if (btnToggleExpenses == null) {
+        break missingId;
+      }
+
+      id = R.id.btnToggleIncome;
+      TextView btnToggleIncome = ViewBindings.findChildViewById(rootView, id);
+      if (btnToggleIncome == null) {
+        break missingId;
+      }
+
       id = R.id.pieChart;
       PieChart pieChart = ViewBindings.findChildViewById(rootView, id);
       if (pieChart == null) {
@@ -136,7 +157,8 @@ public final class FragmentAnalysisBinding implements ViewBinding {
       }
 
       return new FragmentAnalysisBinding((LinearLayout) rootView, btnNextMonth, btnPrevMonth,
-          pieChart, rvCategories, tvMonth, tvTotal, tvTotalExpense, tvTotalIncome);
+          btnToggleExpenses, btnToggleIncome, pieChart, rvCategories, tvMonth, tvTotal,
+          tvTotalExpense, tvTotalIncome);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -29,6 +29,9 @@ class TransactionAdapter(
 
     class TxnViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cvIconBg: CardView = view.findViewById(R.id.cvIconBg)
+        val ivIcon: android.widget.ImageView = view.findViewById(R.id.ivIcon)
+        val ivDefaultIcon: android.widget.ImageView = view.findViewById(R.id.ivDefaultIcon)
+        val tvEmojiFallback: TextView = view.findViewById(R.id.tvEmojiFallback)
         val tvTitle: TextView = view.findViewById(R.id.tvTitle)
         val tvBank: TextView = view.findViewById(R.id.tvBank)
         val tvAmount: TextView = view.findViewById(R.id.tvAmount)
@@ -58,7 +61,29 @@ class TransactionAdapter(
             // Category color from DataManager
             val cat = DataManager.getCategoryById(txn.categoryId)
             val colorHex = cat?.colorHex ?: (if (txn.isIncome) "#77C388" else "#E26C59")
-            holder.cvIconBg.setCardBackgroundColor(Color.parseColor(colorHex))
+
+            if (cat != null) {
+                val resId = CategoryIcons.getDrawableResId(holder.itemView.context, cat.iconName, cat.name)
+                if (resId != 0) {
+                    holder.ivIcon.visibility = View.VISIBLE
+                    holder.ivIcon.setImageResource(resId)
+                    holder.tvEmojiFallback.visibility = View.GONE
+                    holder.ivDefaultIcon.visibility = View.GONE
+                    holder.cvIconBg.setCardBackgroundColor(Color.TRANSPARENT)
+                } else {
+                    holder.ivIcon.visibility = View.GONE
+                    holder.tvEmojiFallback.visibility = View.VISIBLE
+                    holder.tvEmojiFallback.text = CategoryIcons.getEmoji(cat.iconName, cat.name)
+                    holder.ivDefaultIcon.visibility = View.GONE
+                    holder.cvIconBg.setCardBackgroundColor(Color.parseColor(colorHex))
+                }
+            } else {
+                holder.ivIcon.visibility = View.GONE
+                holder.tvEmojiFallback.visibility = View.VISIBLE
+                holder.tvEmojiFallback.text = "💸"
+                holder.ivDefaultIcon.visibility = View.GONE
+                holder.cvIconBg.setCardBackgroundColor(Color.parseColor(colorHex))
+            }
 
             // Bank/account tag
             val acc = DataManager.getAccountById(txn.accountId)

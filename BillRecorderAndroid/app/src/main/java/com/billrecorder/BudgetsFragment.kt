@@ -51,17 +51,12 @@ class BudgetsFragment : Fragment() {
         rv.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             inner class BVH(v: View) : RecyclerView.ViewHolder(v) {
                 val cvIcon: CardView = v.findViewById(R.id.cvIcon)
+                val ivIcon: ImageView = v.findViewById(R.id.ivIcon)
                 val tvIcon: TextView = v.findViewById(R.id.tvIcon)
                 val tvName: TextView = v.findViewById(R.id.tvCatName)
                 val tvCurrentBudget: TextView = v.findViewById(R.id.tvCurrentBudget)
                 val btnSet: Button = v.findViewById(R.id.btnSetBudget)
             }
-
-            private val categoryEmojis = mapOf(
-                "food" to "🍴", "transport" to "🚌", "grocery" to "🛒", "shopping" to "🛍",
-                "entertainment" to "🎮", "bills" to "📄", "clothing" to "👕",
-                "education" to "📚", "health" to "💊", "others" to "💸"
-            )
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
                 BVH(LayoutInflater.from(parent.context).inflate(R.layout.item_budget, parent, false))
@@ -72,9 +67,28 @@ class BudgetsFragment : Fragment() {
                 val bvh = holder as BVH
                 val cat = categories[position]
                 val existing = budgets.find { it.categoryId == cat.id }
-                bvh.tvIcon.text = categoryEmojis[cat.iconName] ?: "💰"
-                android.graphics.Color.parseColor(cat.colorHex).let { bvh.cvIcon.setCardBackgroundColor(it) }
+                
+                val resId = CategoryIcons.getDrawableResId(bvh.itemView.context, cat.iconName, cat.name)
+                if (resId != 0) {
+                    bvh.ivIcon.visibility = View.VISIBLE
+                    bvh.ivIcon.setImageResource(resId)
+                    bvh.tvIcon.visibility = View.GONE
+                    bvh.cvIcon.setCardBackgroundColor(android.graphics.Color.TRANSPARENT)
+                } else {
+                    bvh.ivIcon.visibility = View.GONE
+                    bvh.tvIcon.visibility = View.VISIBLE
+                    bvh.tvIcon.text = CategoryIcons.getEmoji(cat.iconName, cat.name)
+                    android.graphics.Color.parseColor(cat.colorHex).let { bvh.cvIcon.setCardBackgroundColor(it) }
+                }
+                
                 bvh.tvName.text = cat.name
+
+                bvh.cvIcon.setOnClickListener {
+                    CategoryIcons.showIconPickerDialog(bvh.itemView.context) { selectedIcon ->
+                        DataManager.updateCategoryIcon(cat.id, selectedIcon)
+                        view?.let { refresh(it) }
+                    }
+                }
                 
                 if (existing != null) {
                     bvh.tvCurrentBudget.visibility = View.VISIBLE

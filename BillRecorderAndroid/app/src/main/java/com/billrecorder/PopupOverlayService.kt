@@ -86,16 +86,15 @@ class PopupOverlayService : Service() {
                 findViewById<EditText>(R.id.etPopupNote).setText(t.note)
             }
 
-            // Close (✕) — discards the transaction entirely
+            // Trash bin (top-right) — permanently deletes the transaction from database and closes popup
             findViewById<TextView>(R.id.tvClose).setOnClickListener {
                 DataManager.deleteTransaction(txnId)
                 sendBroadcast(Intent("com.billrecorder.NEW_BILL"))
                 dismiss()
             }
 
-            // Discard button — same as close
+            // Unconfirmed button (bottom-left) — keeps the transaction in unconfirmed and closes the popup
             findViewById<Button>(R.id.btnPopupDiscard).setOnClickListener {
-                DataManager.deleteTransaction(txnId)
                 sendBroadcast(Intent("com.billrecorder.NEW_BILL"))
                 dismiss()
             }
@@ -111,11 +110,18 @@ class PopupOverlayService : Service() {
                     val updatedAmount = oldTxn.amount
                     val updatedIsIncome = oldTxn.isIncome
 
-                    // If account changed, reconcile the balances
-                    if (oldTxn.accountId != selectedAcc?.id) {
-                        if (oldTxn.accountId.isNotEmpty()) {
-                            DataManager.updateAccountBalance(oldTxn.accountId, if (updatedIsIncome) -updatedAmount else updatedAmount)
+                    if (oldTxn.isConfirmed) {
+                        // If account changed, reconcile the balances
+                        if (oldTxn.accountId != selectedAcc?.id) {
+                            if (oldTxn.accountId.isNotEmpty()) {
+                                DataManager.updateAccountBalance(oldTxn.accountId, if (updatedIsIncome) -updatedAmount else updatedAmount)
+                            }
+                            selectedAcc?.let { acc ->
+                                DataManager.updateAccountBalance(acc.id, if (updatedIsIncome) updatedAmount else -updatedAmount)
+                            }
                         }
+                    } else {
+                        // Not confirmed before, so just apply the balance to the new selected account!
                         selectedAcc?.let { acc ->
                             DataManager.updateAccountBalance(acc.id, if (updatedIsIncome) updatedAmount else -updatedAmount)
                         }
@@ -125,7 +131,8 @@ class PopupOverlayService : Service() {
                         title = newLabel,
                         note = newNote,
                         categoryId = selectedCat?.id ?: oldTxn.categoryId,
-                        accountId = selectedAcc?.id ?: oldTxn.accountId
+                        accountId = selectedAcc?.id ?: oldTxn.accountId,
+                        isConfirmed = true
                     )
                     DataManager.updateTransaction(updatedTxn)
                     sendBroadcast(Intent("com.billrecorder.NEW_BILL"))
@@ -134,10 +141,14 @@ class PopupOverlayService : Service() {
             }
         }
 
-        // Allow touch + keyboard input (remove FLAG_NOT_FOCUSABLE for EditText)
+        // Convert to pixels (increased by 0.5cm / approx 30dp to 280dp * 410dp) for optimal compact layout
+        val widthPx = (280 * resources.displayMetrics.density).toInt()
+        val heightPx = (410 * resources.displayMetrics.density).toInt()
+
+        // Allow touch + keyboard input
         val params = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
+            widthPx,
+            heightPx,
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
             WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                     WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,

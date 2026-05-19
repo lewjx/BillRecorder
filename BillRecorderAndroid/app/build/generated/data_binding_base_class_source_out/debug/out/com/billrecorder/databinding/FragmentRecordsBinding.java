@@ -4,6 +4,7 @@ package com.billrecorder.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,15 @@ public final class FragmentRecordsBinding implements ViewBinding {
   public final FloatingActionButton fabAdd;
 
   @NonNull
+  public final LinearLayout llUnconfirmedContainer;
+
+  @NonNull
+  public final LinearLayout llUnconfirmedHeader;
+
+  @NonNull
+  public final LinearLayout llUnconfirmedList;
+
+  @NonNull
   public final RecyclerView recyclerView;
 
   @NonNull
@@ -45,20 +55,33 @@ public final class FragmentRecordsBinding implements ViewBinding {
   @NonNull
   public final TextView tvTotalIncome;
 
+  @NonNull
+  public final TextView tvUnconfirmedArrow;
+
+  @NonNull
+  public final TextView tvUnconfirmedTitle;
+
   private FragmentRecordsBinding(@NonNull CoordinatorLayout rootView,
       @NonNull TextView btnNextMonth, @NonNull TextView btnPrevMonth,
-      @NonNull FloatingActionButton fabAdd, @NonNull RecyclerView recyclerView,
-      @NonNull TextView tvMonth, @NonNull TextView tvTotal, @NonNull TextView tvTotalExpense,
-      @NonNull TextView tvTotalIncome) {
+      @NonNull FloatingActionButton fabAdd, @NonNull LinearLayout llUnconfirmedContainer,
+      @NonNull LinearLayout llUnconfirmedHeader, @NonNull LinearLayout llUnconfirmedList,
+      @NonNull RecyclerView recyclerView, @NonNull TextView tvMonth, @NonNull TextView tvTotal,
+      @NonNull TextView tvTotalExpense, @NonNull TextView tvTotalIncome,
+      @NonNull TextView tvUnconfirmedArrow, @NonNull TextView tvUnconfirmedTitle) {
     this.rootView = rootView;
     this.btnNextMonth = btnNextMonth;
     this.btnPrevMonth = btnPrevMonth;
     this.fabAdd = fabAdd;
+    this.llUnconfirmedContainer = llUnconfirmedContainer;
+    this.llUnconfirmedHeader = llUnconfirmedHeader;
+    this.llUnconfirmedList = llUnconfirmedList;
     this.recyclerView = recyclerView;
     this.tvMonth = tvMonth;
     this.tvTotal = tvTotal;
     this.tvTotalExpense = tvTotalExpense;
     this.tvTotalIncome = tvTotalIncome;
+    this.tvUnconfirmedArrow = tvUnconfirmedArrow;
+    this.tvUnconfirmedTitle = tvUnconfirmedTitle;
   }
 
   @Override
@@ -106,6 +129,24 @@ public final class FragmentRecordsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.llUnconfirmedContainer;
+      LinearLayout llUnconfirmedContainer = ViewBindings.findChildViewById(rootView, id);
+      if (llUnconfirmedContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.llUnconfirmedHeader;
+      LinearLayout llUnconfirmedHeader = ViewBindings.findChildViewById(rootView, id);
+      if (llUnconfirmedHeader == null) {
+        break missingId;
+      }
+
+      id = R.id.llUnconfirmedList;
+      LinearLayout llUnconfirmedList = ViewBindings.findChildViewById(rootView, id);
+      if (llUnconfirmedList == null) {
+        break missingId;
+      }
+
       id = R.id.recyclerView;
       RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
       if (recyclerView == null) {
@@ -136,8 +177,21 @@ public final class FragmentRecordsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvUnconfirmedArrow;
+      TextView tvUnconfirmedArrow = ViewBindings.findChildViewById(rootView, id);
+      if (tvUnconfirmedArrow == null) {
+        break missingId;
+      }
+
+      id = R.id.tvUnconfirmedTitle;
+      TextView tvUnconfirmedTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvUnconfirmedTitle == null) {
+        break missingId;
+      }
+
       return new FragmentRecordsBinding((CoordinatorLayout) rootView, btnNextMonth, btnPrevMonth,
-          fabAdd, recyclerView, tvMonth, tvTotal, tvTotalExpense, tvTotalIncome);
+          fabAdd, llUnconfirmedContainer, llUnconfirmedHeader, llUnconfirmedList, recyclerView,
+          tvMonth, tvTotal, tvTotalExpense, tvTotalIncome, tvUnconfirmedArrow, tvUnconfirmedTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

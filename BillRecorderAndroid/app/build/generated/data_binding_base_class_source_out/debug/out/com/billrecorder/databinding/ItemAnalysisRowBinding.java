@@ -4,6 +4,7 @@ package com.billrecorder.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,6 +26,9 @@ public final class ItemAnalysisRowBinding implements ViewBinding {
   public final CardView cvIcon;
 
   @NonNull
+  public final ImageView ivIcon;
+
+  @NonNull
   public final ProgressBar progressBar;
 
   @NonNull
@@ -40,10 +44,11 @@ public final class ItemAnalysisRowBinding implements ViewBinding {
   public final TextView tvCatPercent;
 
   private ItemAnalysisRowBinding(@NonNull LinearLayout rootView, @NonNull CardView cvIcon,
-      @NonNull ProgressBar progressBar, @NonNull TextView tvCatAmount, @NonNull TextView tvCatIcon,
-      @NonNull TextView tvCatName, @NonNull TextView tvCatPercent) {
+      @NonNull ImageView ivIcon, @NonNull ProgressBar progressBar, @NonNull TextView tvCatAmount,
+      @NonNull TextView tvCatIcon, @NonNull TextView tvCatName, @NonNull TextView tvCatPercent) {
     this.rootView = rootView;
     this.cvIcon = cvIcon;
+    this.ivIcon = ivIcon;
     this.progressBar = progressBar;
     this.tvCatAmount = tvCatAmount;
     this.tvCatIcon = tvCatIcon;
@@ -84,6 +89,12 @@ public final class ItemAnalysisRowBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ivIcon;
+      ImageView ivIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivIcon == null) {
+        break missingId;
+      }
+
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
@@ -114,8 +125,8 @@ public final class ItemAnalysisRowBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemAnalysisRowBinding((LinearLayout) rootView, cvIcon, progressBar, tvCatAmount,
-          tvCatIcon, tvCatName, tvCatPercent);
+      return new ItemAnalysisRowBinding((LinearLayout) rootView, cvIcon, ivIcon, progressBar,
+          tvCatAmount, tvCatIcon, tvCatName, tvCatPercent);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

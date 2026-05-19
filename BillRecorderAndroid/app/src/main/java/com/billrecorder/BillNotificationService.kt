@@ -110,12 +110,12 @@ class BillNotificationService : NotificationListenerService() {
             categoryId = categoryId,
             accountId  = inferAccountId(packageName),
             note       = "",
-            rawText    = fullContent.take(300)
+            rawText    = fullContent.take(300),
+            isConfirmed = false
         )
 
         Log.d("BillRecorder", txn.toString())
         DataManager.addTransaction(txn)
-        DataManager.updateAccountBalance(txn.accountId, if (isIncome) amount else -amount)
 
         // ── Auto-cancel the status bar notification if amount < S$50 ──────────
         if (amount < 50.0) {

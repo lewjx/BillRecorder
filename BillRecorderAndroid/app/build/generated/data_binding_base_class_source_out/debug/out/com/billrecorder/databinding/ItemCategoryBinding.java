@@ -4,6 +4,7 @@ package com.billrecorder.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -24,6 +25,9 @@ public final class ItemCategoryBinding implements ViewBinding {
   public final CardView cvIcon;
 
   @NonNull
+  public final ImageView ivIcon;
+
+  @NonNull
   public final TextView tvCatName;
 
   @NonNull
@@ -33,9 +37,11 @@ public final class ItemCategoryBinding implements ViewBinding {
   public final TextView tvMenu;
 
   private ItemCategoryBinding(@NonNull LinearLayout rootView, @NonNull CardView cvIcon,
-      @NonNull TextView tvCatName, @NonNull TextView tvIcon, @NonNull TextView tvMenu) {
+      @NonNull ImageView ivIcon, @NonNull TextView tvCatName, @NonNull TextView tvIcon,
+      @NonNull TextView tvMenu) {
     this.rootView = rootView;
     this.cvIcon = cvIcon;
+    this.ivIcon = ivIcon;
     this.tvCatName = tvCatName;
     this.tvIcon = tvIcon;
     this.tvMenu = tvMenu;
@@ -74,6 +80,12 @@ public final class ItemCategoryBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ivIcon;
+      ImageView ivIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivIcon == null) {
+        break missingId;
+      }
+
       id = R.id.tvCatName;
       TextView tvCatName = ViewBindings.findChildViewById(rootView, id);
       if (tvCatName == null) {
@@ -92,7 +104,8 @@ public final class ItemCategoryBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemCategoryBinding((LinearLayout) rootView, cvIcon, tvCatName, tvIcon, tvMenu);
+      return new ItemCategoryBinding((LinearLayout) rootView, cvIcon, ivIcon, tvCatName, tvIcon,
+          tvMenu);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

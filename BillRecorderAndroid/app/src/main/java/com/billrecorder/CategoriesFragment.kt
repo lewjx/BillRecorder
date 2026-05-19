@@ -15,14 +15,6 @@ import java.util.UUID
 
 class CategoriesFragment : Fragment() {
 
-    private val categoryEmojis = mapOf(
-        "food" to "🍴", "transport" to "🚌", "grocery" to "🛒", "shopping" to "🛍",
-        "entertainment" to "🎮", "bills" to "📄", "clothing" to "👕",
-        "education" to "📚", "health" to "💊", "others" to "💸",
-        "salary" to "💼", "awards" to "🏆", "refunds" to "💵", "rental" to "🏠",
-        "sale" to "🏷", "transfer" to "🔄"
-    )
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_categories, container, false)
     }
@@ -52,6 +44,7 @@ class CategoriesFragment : Fragment() {
 
             inner class CatVH(v: View) : RecyclerView.ViewHolder(v) {
                 val cvIcon: CardView = v.findViewById(R.id.cvIcon)
+                val ivIcon: ImageView = v.findViewById(R.id.ivIcon)
                 val tvIcon: TextView = v.findViewById(R.id.tvIcon)
                 val tvName: TextView = v.findViewById(R.id.tvCatName)
                 val tvMenu: TextView = v.findViewById(R.id.tvMenu)
@@ -73,9 +66,25 @@ class CategoriesFragment : Fragment() {
                 if (holder is HeaderVH && item is SectionHeader) {
                     holder.tv.text = item.title
                 } else if (holder is CatVH && item is Category) {
-                    holder.cvIcon.setCardBackgroundColor(Color.parseColor(item.colorHex))
-                    holder.tvIcon.text = categoryEmojis[item.iconName] ?: "💰"
+                    val resId = CategoryIcons.getDrawableResId(holder.itemView.context, item.iconName, item.name)
+                    if (resId != 0) {
+                        holder.ivIcon.visibility = View.VISIBLE
+                        holder.ivIcon.setImageResource(resId)
+                        holder.tvIcon.visibility = View.GONE
+                        holder.cvIcon.setCardBackgroundColor(Color.TRANSPARENT)
+                    } else {
+                        holder.ivIcon.visibility = View.GONE
+                        holder.tvIcon.visibility = View.VISIBLE
+                        holder.tvIcon.text = CategoryIcons.getEmoji(item.iconName, item.name)
+                        holder.cvIcon.setCardBackgroundColor(Color.parseColor(item.colorHex))
+                    }
                     holder.tvName.text = item.name
+                    holder.cvIcon.setOnClickListener {
+                        CategoryIcons.showIconPickerDialog(holder.itemView.context) { selectedIcon ->
+                            DataManager.updateCategoryIcon(item.id, selectedIcon)
+                            refresh(view)
+                        }
+                    }
                     holder.tvMenu.setOnClickListener {
                         AlertDialog.Builder(requireContext())
                             .setTitle(item.name)
@@ -103,8 +112,21 @@ class CategoriesFragment : Fragment() {
         rbExp.isChecked = true
         rgType.addView(rbExp)
         rgType.addView(rbInc)
+        
+        var selectedIcon = "others"
+        val btnSelectIcon = Button(requireContext()).apply {
+            text = "Select Icon: others"
+            setOnClickListener {
+                CategoryIcons.showIconPickerDialog(requireContext()) { iconName ->
+                    selectedIcon = iconName
+                    text = "Select Icon: $iconName"
+                }
+            }
+        }
+        
         layout.addView(etName)
         layout.addView(rgType)
+        layout.addView(btnSelectIcon)
 
         AlertDialog.Builder(requireContext())
             .setTitle("Add Category")
@@ -114,7 +136,7 @@ class CategoriesFragment : Fragment() {
                 val type = if (rgType.checkedRadioButtonId == rbInc.id) "income" else "expense"
                 val cat = Category(
                     id = "${name.lowercase().replace(" ", "_")}_${type.take(3)}",
-                    name = name, type = type, colorHex = "#805AD5", iconName = "others"
+                    name = name, type = type, colorHex = "#805AD5", iconName = selectedIcon
                 )
                 DataManager.addCategory(cat)
                 view?.let { refresh(it) }

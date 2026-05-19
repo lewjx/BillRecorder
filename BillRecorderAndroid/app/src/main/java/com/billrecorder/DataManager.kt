@@ -30,7 +30,8 @@ object DataManager {
                 categoryId = o.optString("categoryId", "others_exp"),
                 accountId = o.optString("accountId", ""),
                 note = o.optString("note", ""),
-                rawText = o.optString("rawText", "")
+                rawText = o.optString("rawText", ""),
+                isConfirmed = o.optBoolean("isConfirmed", true)
             )
         }.sortedByDescending { it.date }
     }
@@ -71,6 +72,7 @@ object DataManager {
         put("accountId", txn.accountId)
         put("note", txn.note)
         put("rawText", txn.rawText)
+        put("isConfirmed", txn.isConfirmed)
     }
 
     // ─── ACCOUNTS ─────────────────────────────────────────────────────────────
@@ -144,6 +146,19 @@ object DataManager {
         val arr = JSONArray(prefs.getString("categories", "[]") ?: "[]")
         arr.put(catToJson(cat))
         prefs.edit().putString("categories", arr.toString()).apply()
+    }
+
+    fun updateCategoryIcon(categoryId: String, newIconName: String) {
+        val arr = JSONArray(prefs.getString("categories", "[]") ?: "[]")
+        val updated = JSONArray()
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i)
+            if (o.optString("id") == categoryId) {
+                o.put("iconName", newIconName)
+            }
+            updated.put(o)
+        }
+        prefs.edit().putString("categories", updated.toString()).apply()
     }
 
     fun deleteCategory(id: String) {
