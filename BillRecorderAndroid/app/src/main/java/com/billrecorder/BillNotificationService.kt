@@ -13,20 +13,111 @@ import java.util.regex.Pattern
 
 class BillNotificationService : NotificationListenerService() {
 
-    // ── Only listen to these exact bank package names ─────────────────────────
+    // ── Whitelisted bank, wallet, and transit package names ────────────────────
     private val allowedPackages = setOf(
         "com.ocbc.mobile",
         "com.ocbc.onlinebanking",
         "sg.com.dbs.mobile.banking",
         "com.dbs.mbanking.sg",
         "sg.com.uob",
-        "sg.com.posb.mobile"
+        "sg.com.posb.mobile",
+
+        // Wallets & Payments
+        "com.grabtaxi.passenger",              // Grab / GrabPay
+        "com.shopee.sg",                      // Shopee / ShopeePay
+        "com.singtel.dash",                   // Singtel Dash
+        "com.google.android.apps.walletnfcrel", // Google Pay / Wallet
+
+        // Transit
+        "com.transitlink.simplygo",           // SimplyGo
+        "sg.com.transitlink.simplygo",        // SimplyGo (Legacy/alternative package)
+        
+        // Emails
+        "com.google.android.gm"               // Gmail
     )
 
     private val moneyRegex = Pattern.compile(
         "(?:RM|SGD|S\\$|\\$)\\s?(\\d+(?:,\\d{3})*(?:\\.\\d{1,2})?)",
         Pattern.CASE_INSENSITIVE
     )
+
+    private val testReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
+            if (intent?.action == "com.billrecorder.TRIGGER_TEST") {
+                val pkg = intent.getStringExtra("package") ?: "com.transitlink.simplygo"
+                val title = intent.getStringExtra("title") ?: "SimplyGo"
+                val text = intent.getStringExtra("text") ?: "Spent S$2.62 on MRT"
+                processMockNotification(pkg, title, text)
+            }
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        try {
+            registerReceiver(testReceiver, android.content.IntentFilter("com.billrecorder.TRIGGER_TEST"))
+        } catch (_: Exception) {}
+    }
+
+    override fun onDestroy() {
+        try {
+            unregisterReceiver(testReceiver)
+        } catch (_: Exception) {}
+        super.onDestroy()
+    }
+
+    fun processMockNotification(packageName: String, title: String, text: String) {
+        val fullContent = "$title $text"
+        val matcher = moneyRegex.matcher(fullContent)
+        val amount = if (matcher.find()) {
+            matcher.group(1)?.replace(",", "")?.toDoubleOrNull() ?: 0.0
+        } else 0.0
+
+        if (amount == 0.0) return
+
+        val lowerContent = fullContent.lowercase()
+        val isIncome = false
+
+        // Correctly resolve transport category for SimplyGo/Transit
+        val categoryId = when {
+            packageName.contains("simplygo", ignoreCase = true) ||
+            packageName.contains("transitlink", ignoreCase = true) ||
+            fullContent.contains("transport", ignoreCase = true) ||
+            fullContent.contains("mrt", ignoreCase = true) ||
+            fullContent.contains("bus", ignoreCase = true)           -> "transport_exp"
+            else -> "others_exp"
+        }
+
+        val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
+        val txnTitle = title.ifBlank { packageName }
+        val amountText = "-S$%.2f".format(amount)
+
+        val txn = Transaction(
+            id         = UUID.randomUUID().toString(),
+            title      = txnTitle,
+            date       = timestamp,
+            amount     = amount,
+            isIncome   = isIncome,
+            categoryId = categoryId,
+            accountId  = inferAccountId(packageName),
+            note       = "SIMULATED ALERT",
+            rawText    = fullContent.take(300),
+            isConfirmed = false
+        )
+
+        DataManager.init(applicationContext)
+        DataManager.addTransaction(txn)
+
+        val popupIntent = Intent(applicationContext, PopupOverlayService::class.java).apply {
+            putExtra("txnId",    txn.id)
+            putExtra("title",    txn.title)
+            putExtra("amount",   amountText)
+            putExtra("isIncome", isIncome)
+        }
+        startService(popupIntent)
+
+        sendBroadcast(Intent("com.billrecorder.NEW_BILL"))
+    }
 
     override fun onListenerConnected() {
         super.onListenerConnected()
@@ -38,7 +129,7 @@ class BillNotificationService : NotificationListenerService() {
         if (sbn == null) return
 
         val packageName = sbn.packageName
-        if (packageName !in allowedPackages) return   // ← strict filter
+        if (packageName !in allowedPackages) return   // ← whitelist filter
 
         DataManager.init(applicationContext)
 
@@ -78,13 +169,42 @@ class BillNotificationService : NotificationListenerService() {
             else -> false  // default to expense when ambiguous
         }
 
+        // ── Duplicate Detection (15 minute window) ─────────────────────────
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+        val now = Date()
+        val isDuplicate = DataManager.getTransactions().take(20).any { existing ->
+            if (existing.amount == amount && existing.isIncome == isIncome) {
+                try {
+                    val existingDate = sdf.parse(existing.date)
+                    if (existingDate != null) {
+                        val diffMinutes = Math.abs(now.time - existingDate.time) / (60 * 1000)
+                        return@any diffMinutes <= 15
+                    }
+                } catch (e: Exception) {}
+            }
+            false
+        }
+
+        if (isDuplicate) {
+            Log.d("BillRecorder", "Duplicate detected for amount $amount. Ignoring.")
+            if (packageName == "com.google.android.gm") {
+                // Delete the redundant email notification after 10 seconds as requested
+                android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                    try { cancelNotification(sbn.key) } catch (e: Exception) {}
+                }, 10000)
+            }
+            return // Skip recording duplicate
+        }
+
         val categoryId = when {
-            fullContent.contains("food", ignoreCase = true) ||
-            fullContent.contains("restaurant", ignoreCase = true) ||
-            fullContent.contains("grab", ignoreCase = true)          -> "food_exp"
+            packageName.contains("simplygo", ignoreCase = true) ||
+            packageName.contains("transitlink", ignoreCase = true) ||
             fullContent.contains("transport", ignoreCase = true) ||
             fullContent.contains("mrt", ignoreCase = true) ||
             fullContent.contains("bus", ignoreCase = true)           -> "transport_exp"
+            fullContent.contains("food", ignoreCase = true) ||
+            fullContent.contains("restaurant", ignoreCase = true) ||
+            fullContent.contains("grab", ignoreCase = true)          -> "food_exp"
             fullContent.contains("grocery", ignoreCase = true) ||
             fullContent.contains("ntuc", ignoreCase = true) ||
             fullContent.contains("cold storage", ignoreCase = true)  -> "grocery_exp"
@@ -99,7 +219,7 @@ class BillNotificationService : NotificationListenerService() {
         val timestamp  = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
         val txnTitle   = title.ifBlank { packageName }
         val sign       = if (isIncome) "+" else "-"
-        val amountText = "${sign}S${"%.2f".format(amount)}"
+        val amountText = "${sign}S\$${"%.2f".format(amount)}"
 
         val txn = Transaction(
             id         = UUID.randomUUID().toString(),

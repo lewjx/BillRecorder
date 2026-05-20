@@ -75,14 +75,14 @@ class TransactionAdapter(
                     holder.tvEmojiFallback.visibility = View.VISIBLE
                     holder.tvEmojiFallback.text = CategoryIcons.getEmoji(cat.iconName, cat.name)
                     holder.ivDefaultIcon.visibility = View.GONE
-                    holder.cvIconBg.setCardBackgroundColor(Color.parseColor(colorHex))
+                    holder.cvIconBg.setCardBackgroundColor(getCachedColor(colorHex))
                 }
             } else {
                 holder.ivIcon.visibility = View.GONE
                 holder.tvEmojiFallback.visibility = View.VISIBLE
                 holder.tvEmojiFallback.text = "💸"
                 holder.ivDefaultIcon.visibility = View.GONE
-                holder.cvIconBg.setCardBackgroundColor(Color.parseColor(colorHex))
+                holder.cvIconBg.setCardBackgroundColor(getCachedColor(colorHex))
             }
 
             // Bank/account tag
@@ -91,8 +91,8 @@ class TransactionAdapter(
 
             val sign = if (txn.isIncome) "+" else "-"
             val amtColor = if (txn.isIncome) "#77C388" else "#E26C59"
-            holder.tvAmount.setTextColor(Color.parseColor(amtColor))
-            holder.tvAmount.text = "${sign}S${"%.2f".format(txn.amount)}"
+            holder.tvAmount.setTextColor(getCachedColor(amtColor))
+            holder.tvAmount.text = "${sign}S\$${df.format(txn.amount)}"
 
             holder.itemView.setOnClickListener { onItemClick(txn) }
         }
@@ -106,6 +106,19 @@ class TransactionAdapter(
     }
 
     companion object {
+        private val df = java.text.DecimalFormat("0.00")
+        private val colorCache = mutableMapOf<String, Int>()
+
+        private fun getCachedColor(hex: String): Int {
+            return colorCache.getOrPut(hex) {
+                try {
+                    Color.parseColor(hex)
+                } catch (e: Exception) {
+                    Color.GRAY
+                }
+            }
+        }
+
         private fun buildItems(transactions: List<Transaction>): List<ListItem> {
             val result = mutableListOf<ListItem>()
             val sdfIn = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())

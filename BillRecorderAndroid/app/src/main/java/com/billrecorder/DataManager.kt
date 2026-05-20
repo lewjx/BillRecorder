@@ -8,11 +8,12 @@ import java.util.UUID
 
 object DataManager {
 
-    private lateinit var prefs: SharedPreferences
+    internal lateinit var prefs: SharedPreferences
 
     fun init(context: Context) {
         prefs = context.getSharedPreferences("BillLogs", Context.MODE_PRIVATE)
         seedDefaultsIfNeeded()
+        CsvHistoryImporter.importIfNeeded()
     }
 
     // ─── TRANSACTIONS ─────────────────────────────────────────────────────────
@@ -263,4 +264,26 @@ object DataManager {
         getTransactions()
             .filter { it.isIncome && it.date.startsWith(monthYear) }
             .sumOf { it.amount }
+
+    // ─── EXPORT ───────────────────────────────────────────────────────────────
+
+    fun exportCsvContent(): String {
+        val builder = java.lang.StringBuilder()
+        builder.append("ID,Title,Date,Amount,Type,Category,Account,Note,RawText,IsConfirmed\n")
+        getTransactions().forEach {
+            val type = if (it.isIncome) "Income" else "Expense"
+            val category = getCategoryById(it.categoryId)?.name ?: ""
+            val account = getAccountById(it.accountId)?.name ?: ""
+            builder.append("${it.id.escapeCsv()},${it.title.escapeCsv()},${it.date.escapeCsv()},${it.amount},${type.escapeCsv()},${category.escapeCsv()},${account.escapeCsv()},${it.note.escapeCsv()},${it.rawText.escapeCsv()},${it.isConfirmed}\n")
+        }
+        return builder.toString()
+    }
+
+    private fun String.escapeCsv(): String {
+        var escaped = this.replace("\"", "\"\"")
+        if (escaped.contains(",") || escaped.contains("\"") || escaped.contains("\n")) {
+            escaped = "\"$escaped\""
+        }
+        return escaped
+    }
 }

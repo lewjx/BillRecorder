@@ -4,6 +4,7 @@ package com.billrecorder.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -23,6 +24,9 @@ public final class FragmentRecordsBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final ImageView btnMenu;
+
+  @NonNull
   public final TextView btnNextMonth;
 
   @NonNull
@@ -30,6 +34,9 @@ public final class FragmentRecordsBinding implements ViewBinding {
 
   @NonNull
   public final FloatingActionButton fabAdd;
+
+  @NonNull
+  public final LinearLayout llAccountFilter;
 
   @NonNull
   public final LinearLayout llUnconfirmedContainer;
@@ -61,17 +68,20 @@ public final class FragmentRecordsBinding implements ViewBinding {
   @NonNull
   public final TextView tvUnconfirmedTitle;
 
-  private FragmentRecordsBinding(@NonNull CoordinatorLayout rootView,
+  private FragmentRecordsBinding(@NonNull CoordinatorLayout rootView, @NonNull ImageView btnMenu,
       @NonNull TextView btnNextMonth, @NonNull TextView btnPrevMonth,
-      @NonNull FloatingActionButton fabAdd, @NonNull LinearLayout llUnconfirmedContainer,
-      @NonNull LinearLayout llUnconfirmedHeader, @NonNull LinearLayout llUnconfirmedList,
-      @NonNull RecyclerView recyclerView, @NonNull TextView tvMonth, @NonNull TextView tvTotal,
-      @NonNull TextView tvTotalExpense, @NonNull TextView tvTotalIncome,
-      @NonNull TextView tvUnconfirmedArrow, @NonNull TextView tvUnconfirmedTitle) {
+      @NonNull FloatingActionButton fabAdd, @NonNull LinearLayout llAccountFilter,
+      @NonNull LinearLayout llUnconfirmedContainer, @NonNull LinearLayout llUnconfirmedHeader,
+      @NonNull LinearLayout llUnconfirmedList, @NonNull RecyclerView recyclerView,
+      @NonNull TextView tvMonth, @NonNull TextView tvTotal, @NonNull TextView tvTotalExpense,
+      @NonNull TextView tvTotalIncome, @NonNull TextView tvUnconfirmedArrow,
+      @NonNull TextView tvUnconfirmedTitle) {
     this.rootView = rootView;
+    this.btnMenu = btnMenu;
     this.btnNextMonth = btnNextMonth;
     this.btnPrevMonth = btnPrevMonth;
     this.fabAdd = fabAdd;
+    this.llAccountFilter = llAccountFilter;
     this.llUnconfirmedContainer = llUnconfirmedContainer;
     this.llUnconfirmedHeader = llUnconfirmedHeader;
     this.llUnconfirmedList = llUnconfirmedList;
@@ -111,6 +121,12 @@ public final class FragmentRecordsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnMenu;
+      ImageView btnMenu = ViewBindings.findChildViewById(rootView, id);
+      if (btnMenu == null) {
+        break missingId;
+      }
+
       id = R.id.btnNextMonth;
       TextView btnNextMonth = ViewBindings.findChildViewById(rootView, id);
       if (btnNextMonth == null) {
@@ -126,6 +142,12 @@ public final class FragmentRecordsBinding implements ViewBinding {
       id = R.id.fabAdd;
       FloatingActionButton fabAdd = ViewBindings.findChildViewById(rootView, id);
       if (fabAdd == null) {
+        break missingId;
+      }
+
+      id = R.id.llAccountFilter;
+      LinearLayout llAccountFilter = ViewBindings.findChildViewById(rootView, id);
+      if (llAccountFilter == null) {
         break missingId;
       }
 
@@ -189,9 +211,10 @@ public final class FragmentRecordsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentRecordsBinding((CoordinatorLayout) rootView, btnNextMonth, btnPrevMonth,
-          fabAdd, llUnconfirmedContainer, llUnconfirmedHeader, llUnconfirmedList, recyclerView,
-          tvMonth, tvTotal, tvTotalExpense, tvTotalIncome, tvUnconfirmedArrow, tvUnconfirmedTitle);
+      return new FragmentRecordsBinding((CoordinatorLayout) rootView, btnMenu, btnNextMonth,
+          btnPrevMonth, fabAdd, llAccountFilter, llUnconfirmedContainer, llUnconfirmedHeader,
+          llUnconfirmedList, recyclerView, tvMonth, tvTotal, tvTotalExpense, tvTotalIncome,
+          tvUnconfirmedArrow, tvUnconfirmedTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -61,31 +61,46 @@ object CategoryIcons {
         "transfer" to "ic_transfer"
     )
 
+    private val resIdCache = mutableMapOf<Pair<String, String>, Int>()
+
     fun getDrawableResId(context: Context, iconName: String, categoryName: String): Int {
         val keyByIcon = iconName.lowercase().trim()
         val keyByName = categoryName.lowercase().trim()
+        val cacheKey = Pair(keyByIcon, keyByName)
+        
+        resIdCache[cacheKey]?.let { return it }
+
+        var foundResId = 0
 
         // 1. Direct match on iconName
         nameToDrawable[keyByIcon]?.let {
             val resId = context.resources.getIdentifier(it, "drawable", context.packageName)
-            if (resId != 0) return resId
+            if (resId != 0) foundResId = resId
         }
 
         // 2. Direct match on categoryName
-        nameToDrawable[keyByName]?.let {
-            val resId = context.resources.getIdentifier(it, "drawable", context.packageName)
-            if (resId != 0) return resId
-        }
-
-        // 3. Substring match on categoryName
-        for ((k, v) in nameToDrawable) {
-            if (keyByName.contains(k) || k.contains(keyByName)) {
-                val resId = context.resources.getIdentifier(v, "drawable", context.packageName)
-                if (resId != 0) return resId
+        if (foundResId == 0) {
+            nameToDrawable[keyByName]?.let {
+                val resId = context.resources.getIdentifier(it, "drawable", context.packageName)
+                if (resId != 0) foundResId = resId
             }
         }
 
-        return 0 // No resource found
+        // 3. Substring match on categoryName
+        if (foundResId == 0) {
+            for ((k, v) in nameToDrawable) {
+                if (keyByName.contains(k) || k.contains(keyByName)) {
+                    val resId = context.resources.getIdentifier(v, "drawable", context.packageName)
+                    if (resId != 0) {
+                        foundResId = resId
+                        break
+                    }
+                }
+            }
+        }
+
+        resIdCache[cacheKey] = foundResId
+        return foundResId
     }
 
     fun getEmoji(iconName: String, categoryName: String): String {

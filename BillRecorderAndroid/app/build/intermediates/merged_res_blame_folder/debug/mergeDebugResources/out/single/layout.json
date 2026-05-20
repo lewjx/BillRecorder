@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\fragment_accounts.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\fragment_accounts.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_date_header.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_date_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\dialog_add_transaction.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\dialog_add_transaction.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_transaction.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_transaction.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_category.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_budget.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_budget.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeDebugResources-36:/layout/dialog_add_transaction.xml",
+        "source": "com.billrecorder.app-main-39:/layout/dialog_add_transaction.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_account.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_account.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_category_picker.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_category_picker.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_analysis_row.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_analysis_row.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\item_account_picker.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\item_account_picker.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\popup_overlay.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\popup_overlay.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\fragment_analysis.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\fragment_analysis.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\dialog_transaction_detail.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\dialog_transaction_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\fragment_budgets.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\fragment_budgets.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\fragment_categories.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\fragment_categories.xml"
+    },
+    {
+        "merged": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-mergeDebugResources-36:\\layout\\fragment_records.xml",
+        "source": "C:\\Users\\hp\\.gradle\\daemon\\8.13\\com.billrecorder.app-main-39:\\layout\\fragment_records.xml"
+    }
+]

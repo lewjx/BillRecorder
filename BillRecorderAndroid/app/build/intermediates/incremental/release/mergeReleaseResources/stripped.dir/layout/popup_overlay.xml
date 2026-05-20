@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_bg"
+    android:elevation="12dp"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+ 
+        <!-- Header row -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="💳  New Transaction"
+                android:textColor="#F1E3A1" android:textSize="14sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/tvClose" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="🗑️"
+                android:textColor="#E26C59" android:textSize="18sp" android:padding="4dp"/>
+        </LinearLayout>
+ 
+        <!-- Income / Expense badge -->
+        <TextView android:id="@+id/tvTypeBadge"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="EXPENSE" android:textColor="#FFFFFF"
+            android:textSize="10sp" android:textStyle="bold"
+            android:paddingHorizontal="8dp" android:paddingVertical="2dp"
+            android:background="@drawable/btn_outline_drawable"
+            android:layout_marginBottom="6dp"/>
+ 
+        <!-- Amount display (read-only) -->
+        <TextView android:id="@+id/tvPopupAmount"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="-S$25.00" android:textColor="#E26C59"
+            android:textSize="28sp" android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+ 
+        <!-- Editable Label -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="LABEL" android:textColor="#888888"
+            android:textSize="10sp" android:letterSpacing="0.1"
+            android:layout_marginBottom="2dp"/>
+        <EditText android:id="@+id/etPopupLabel"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="e.g. Coffee at Starbucks"
+            android:textColor="#FFFFFF" android:textColorHint="#666666"
+            android:textSize="14sp" android:padding="8dp"
+            android:background="@drawable/input_bg"
+            android:inputType="text" android:maxLines="1"
+            android:layout_marginBottom="8dp"/>
+ 
+        <!-- Category Dropdown -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="CATEGORY" android:textColor="#888888"
+            android:textSize="10sp" android:letterSpacing="0.1"
+            android:layout_marginBottom="2dp"/>
+        <Spinner android:id="@+id/spinnerPopupCategory"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:backgroundTint="#F1E3A1"
+            android:layout_marginBottom="8dp"/>
+ 
+        <!-- Account Dropdown -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="ACCOUNT" android:textColor="#888888"
+            android:textSize="10sp" android:letterSpacing="0.1"
+            android:layout_marginBottom="2dp"/>
+        <Spinner android:id="@+id/spinnerPopupAccount"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:backgroundTint="#F1E3A1"
+            android:layout_marginBottom="8dp"/>
+ 
+        <!-- Editable Description / Note -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="DESCRIPTION" android:textColor="#888888"
+            android:textSize="10sp" android:letterSpacing="0.1"
+            android:layout_marginBottom="2dp"/>
+        <EditText android:id="@+id/etPopupNote"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="Optional note..."
+            android:textColor="#FFFFFF" android:textColorHint="#666666"
+            android:textSize="14sp" android:padding="8dp"
+            android:background="@drawable/input_bg"
+            android:inputType="textMultiLine"
+            android:minLines="1" android:maxLines="2"
+            android:layout_marginBottom="12dp"/>
+ 
+        <!-- Action Buttons -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btnPopupDiscard"
+                android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="Unconfirmed"
+                android:textColor="#888888" android:textSize="12sp"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_marginEnd="6dp"/>
+            <Button android:id="@+id/btnPopupSave"
+                android:layout_width="0dp" android:layout_height="40dp"
+                android:layout_weight="1" android:text="Save"
+                android:textColor="#403F3B" android:textSize="14sp"
+                android:backgroundTint="#F1E3A1"/>
+        </LinearLayout>
+ 
+    </LinearLayout>
+</ScrollView>

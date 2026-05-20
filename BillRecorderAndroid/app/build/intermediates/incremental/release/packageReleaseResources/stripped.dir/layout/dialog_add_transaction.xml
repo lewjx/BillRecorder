@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#494844"
+    android:paddingBottom="16dp">
+
+    <!-- 1. Header Toolbar (CANCEL & SAVE) -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="✕ CANCEL"
+            android:textColor="@color/textPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="✓ SAVE"
+            android:textColor="@color/textPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:focusable="true"/>
+    </RelativeLayout>
+
+    <!-- 2. Income / Expense / Transfer Segmented Toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="16dp">
+
+        <LinearLayout
+            android:id="@+id/btnTypeIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:id="@+id/tvIncomeCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓ "
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:visibility="visible"/>
+            <TextView
+                android:id="@+id/tvIncomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INCOME"
+                android:textColor="@color/textSecondary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" | "
+            android:textColor="@color/dividerColor"
+            android:textSize="14sp"
+            android:layout_marginHorizontal="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/btnTypeExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:id="@+id/tvExpenseCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓ "
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tvExpenseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXPENSE"
+                android:textColor="@color/dividerColor"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" | "
+            android:textColor="@color/dividerColor"
+            android:textSize="14sp"
+            android:layout_marginHorizontal="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/btnTypeTransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:id="@+id/tvTransferCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓ "
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tvTransferText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TRANSFER"
+                android:textColor="@color/dividerColor"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 3. Account and Category side-by-side pills -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="16dp">
+
+        <!-- Account Pill -->
+        <LinearLayout
+            android:id="@+id/llPillAccount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                android:textColor="@color/dividerColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/pill_border_bg"
+                android:paddingHorizontal="12dp">
+
+                <TextView
+                    android:id="@+id/tvPillAccLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VISA"
+                    android:textColor="#FFFFFF"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:paddingHorizontal="5dp"
+                    android:paddingVertical="2dp"
+                    android:background="@drawable/ic_visa_card"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvPillAccName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ocbc"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Category Pill -->
+        <LinearLayout
+            android:id="@+id/llPillCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textColor="@color/dividerColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/pill_border_bg"
+                android:paddingHorizontal="12dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvPillCatIconBg"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    app:cardCornerRadius="11dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivPillCatIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter" />
+
+                    <TextView
+                        android:id="@+id/tvPillCatEmoji"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:text="🏷️"
+                        android:visibility="visible" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvPillCatName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 4. Notes input field -->
+    <EditText
+        android:id="@+id/etNote"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Add notes"
+        android:textColorHint="@color/dividerColor"
+        android:textColor="@color/textSecondary"
+        android:background="@drawable/input_bg"
+        android:paddingHorizontal="16dp"
+        android:textSize="14sp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:singleLine="true"/>
+
+    <!-- 5. Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dividerColor"
+        android:alpha="0.3"/>
+
+    <!-- 6. Dynamic Content Section (Calculator, Category Picker, Account Picker) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Panel A: Calculator (VISIBLE BY DEFAULT) -->
+        <LinearLayout
+            android:id="@+id/llPanelCalculator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <!-- Amount Input View with Backspace -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:paddingHorizontal="24dp">
+
+                <TextView
+                    android:id="@+id/tvCalcAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="0.00"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/btnCalcBackspace"/>
+
+                <ImageView
+                    android:id="@+id/btnCalcBackspace"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@android:drawable/ic_input_delete"
+                    app:tint="@color/textPrimary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp"/>
+            </RelativeLayout>
+
+            <!-- Keyboard Layout -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="4"
+                android:rowCount="4"
+                android:padding="8dp"
+                android:alignmentMode="alignBounds">
+
+                <!-- Row 1 -->
+                <Button
+                    android:id="@+id/btnCalcPlus"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="+"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_op_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc7"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="7"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc8"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="8"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc9"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="9"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <!-- Row 2 -->
+                <Button
+                    android:id="@+id/btnCalcMinus"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="-"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_op_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc4"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="4"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc5"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="5"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc6"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="6"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <!-- Row 3 -->
+                <Button
+                    android:id="@+id/btnCalcMultiply"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="×"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_op_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc1"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="1"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc2"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="2"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc3"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="3"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <!-- Row 4 -->
+                <Button
+                    android:id="@+id/btnCalcDivide"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="÷"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_op_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalc0"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="0"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalcDot"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="."
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_num_bg"
+                    app:backgroundTint="@null"/>
+
+                <Button
+                    android:id="@+id/btnCalcEquals"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="2dp"
+                    android:text="="
+                    android:textColor="@color/textSecondary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/calculator_key_op_bg"
+                    app:backgroundTint="@null"/>
+            </GridLayout>
+
+            <!-- Date/Time Footer Button Bar -->
+            <LinearLayout
+                android:id="@+id/btnCalcDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tvCalcDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="May 19, 2026"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="16dp"
+                    android:background="@color/dividerColor"
+                    android:layout_marginHorizontal="16dp"/>
+
+                <TextView
+                    android:id="@+id/tvCalcTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7:37 PM"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Panel B: Category Picker (GONE BY DEFAULT) -->
+        <LinearLayout
+            android:id="@+id/llPanelCategoryPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select a category"
+                android:textColor="@color/textPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Grid container for category circular items -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategoryPicker"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:scrollbars="vertical"/>
+
+            <Button
+                android:id="@+id/btnPickerAddCategory"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="+ ADD NEW CATEGORY"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                android:background="@drawable/btn_outline_drawable"
+                app:backgroundTint="@null"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+
+        <!-- Panel C: Account Picker (GONE BY DEFAULT) -->
+        <LinearLayout
+            android:id="@+id/llPanelAccountPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select an account"
+                android:textColor="@color/textPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- List container for accounts -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAccountPicker"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:scrollbars="vertical"/>
+
+            <Button
+                android:id="@+id/btnPickerAddAccount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="+ ADD NEW ACCOUNT"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                android:background="@drawable/btn_outline_drawable"
+                app:backgroundTint="@null"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

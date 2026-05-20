@@ -1,0 +1,70 @@
+[
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/fragment_budgets.xml",
+        "source": "com.billrecorder.app-main-38:/layout/fragment_budgets.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_account_picker.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_account_picker.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_account.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_account.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/activity_main.xml",
+        "source": "com.billrecorder.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/fragment_categories.xml",
+        "source": "com.billrecorder.app-main-38:/layout/fragment_categories.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_transaction.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_transaction.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/dialog_transaction_detail.xml",
+        "source": "com.billrecorder.app-main-38:/layout/dialog_transaction_detail.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/fragment_accounts.xml",
+        "source": "com.billrecorder.app-main-38:/layout/fragment_accounts.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_category.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_category.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/dialog_add_transaction.xml",
+        "source": "com.billrecorder.app-main-38:/layout/dialog_add_transaction.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_date_header.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_date_header.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/fragment_analysis.xml",
+        "source": "com.billrecorder.app-main-38:/layout/fragment_analysis.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_category_picker.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_category_picker.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/fragment_records.xml",
+        "source": "com.billrecorder.app-main-38:/layout/fragment_records.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/popup_overlay.xml",
+        "source": "com.billrecorder.app-main-38:/layout/popup_overlay.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_budget.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_budget.xml"
+    },
+    {
+        "merged": "com.billrecorder.app-mergeReleaseResources-36:/layout/item_analysis_row.xml",
+        "source": "com.billrecorder.app-main-38:/layout/item_analysis_row.xml"
+    }
+]

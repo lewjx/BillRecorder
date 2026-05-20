@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPickerIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <ImageView
+            android:id="@+id/ivPickerIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/tvPickerEmoji"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:visibility="gone" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvPickerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/textSecondary"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+</LinearLayout>

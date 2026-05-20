@@ -34,9 +34,9 @@ class AccountsFragment : Fragment() {
         val totalExpense = allTxns.filter { !it.isIncome }.sumOf { it.amount }
         val totalIncome = allTxns.filter { it.isIncome }.sumOf { it.amount }
 
-        view.findViewById<TextView>(R.id.tvAllAccounts).text = "[ All Accounts S${"%.2f".format(allBalance)} ]"
-        view.findViewById<TextView>(R.id.tvExpenseSoFar).text = "S${"%.2f".format(totalExpense)}"
-        view.findViewById<TextView>(R.id.tvIncomeSoFar).text = "S${"%.2f".format(totalIncome)}"
+        view.findViewById<TextView>(R.id.tvAllAccounts).text = "[ All Accounts S\$${"%.2f".format(allBalance)} ]"
+        view.findViewById<TextView>(R.id.tvExpenseSoFar).text = "S\$${"%.2f".format(totalExpense)}"
+        view.findViewById<TextView>(R.id.tvIncomeSoFar).text = "S\$${"%.2f".format(totalIncome)}"
 
         val rv = view.findViewById<RecyclerView>(R.id.rvAccounts)
         rv.layoutManager = LinearLayoutManager(requireContext())
@@ -57,7 +57,7 @@ class AccountsFragment : Fragment() {
                 val avh = holder as AVH
                 val acc = accounts[position]
                 avh.tvName.text = acc.name
-                avh.tvBalance.text = "Balance: S${"%.2f".format(acc.balance)}"
+                avh.tvBalance.text = "Balance: S\$${"%.2f".format(acc.balance)}"
                 avh.tvMenu.setOnClickListener {
                     AlertDialog.Builder(requireContext())
                         .setTitle(acc.name)

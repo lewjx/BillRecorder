@@ -17,4 +17,9 @@
         <item name="android:statusBarColor">@color/bgDark</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
+
+    <style name="DialogSlideUp" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
 </resources>
